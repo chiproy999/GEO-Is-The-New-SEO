@@ -1,5 +1,6 @@
-import { type User, type InsertUser, type ChecklistProgress, type InsertChecklistProgress } from "@shared/schema";
-import { randomUUID } from "crypto";
+import { users, checklistProgress, type User, type InsertUser, type ChecklistProgress, type InsertChecklistProgress } from "@shared/schema";
+import { db } from "./db";
+import { eq, and } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -10,70 +11,85 @@ export interface IStorage {
   getUserProgress(userId?: string): Promise<{ [category: string]: { completed: number; total: number } }>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private checklistProgress: Map<string, ChecklistProgress>;
-
-  constructor() {
-    this.users = new Map();
-    this.checklistProgress = new Map();
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
     return user;
   }
 
   async getChecklistProgress(userId?: string, category?: string): Promise<ChecklistProgress[]> {
-    const allProgress = Array.from(this.checklistProgress.values());
-    return allProgress.filter(progress => {
-      if (userId && progress.userId !== userId) return false;
-      if (category && progress.category !== category) return false;
-      return true;
-    });
+    let query = db.select().from(checklistProgress);
+    
+    const conditions = [];
+    if (userId) {
+      conditions.push(eq(checklistProgress.userId, userId));
+    }
+    if (category) {
+      conditions.push(eq(checklistProgress.category, category));
+    }
+    
+    if (conditions.length > 0) {
+      query = query.where(and(...conditions));
+    }
+    
+    return await query;
   }
 
   async updateChecklistItem(progressData: InsertChecklistProgress & { userId?: string }): Promise<ChecklistProgress> {
-    const key = `${progressData.userId || 'anonymous'}-${progressData.category}-${progressData.itemId}`;
-    
-    const existing = this.checklistProgress.get(key);
+    // Check if item already exists
+    const [existing] = await db
+      .select()
+      .from(checklistProgress)
+      .where(
+        and(
+          eq(checklistProgress.userId, progressData.userId || null),
+          eq(checklistProgress.category, progressData.category),
+          eq(checklistProgress.itemId, progressData.itemId)
+        )
+      );
+
     if (existing) {
-      const updated: ChecklistProgress = {
-        ...existing,
-        completed: progressData.completed,
-        completedAt: progressData.completed ? new Date() : null,
-      };
-      this.checklistProgress.set(key, updated);
+      // Update existing item
+      const [updated] = await db
+        .update(checklistProgress)
+        .set({
+          completed: progressData.completed,
+          completedAt: progressData.completed ? new Date() : null,
+        })
+        .where(eq(checklistProgress.id, existing.id))
+        .returning();
       return updated;
     } else {
-      const id = randomUUID();
-      const newProgress: ChecklistProgress = {
-        id,
-        userId: progressData.userId || null,
-        category: progressData.category,
-        itemId: progressData.itemId,
-        completed: progressData.completed,
-        completedAt: progressData.completed ? new Date() : null,
-      };
-      this.checklistProgress.set(key, newProgress);
+      // Create new item
+      const [newProgress] = await db
+        .insert(checklistProgress)
+        .values({
+          userId: progressData.userId || null,
+          category: progressData.category,
+          itemId: progressData.itemId,
+          completed: progressData.completed,
+          completedAt: progressData.completed ? new Date() : null,
+        })
+        .returning();
       return newProgress;
     }
   }
 
   async getUserProgress(userId?: string): Promise<{ [category: string]: { completed: number; total: number } }> {
-    // Return mock data for total counts based on the checklist items
+    // Return fixed data for total counts based on the checklist items
     const totalCounts = {
       'geo': 6,
       'maps': 6,
@@ -96,4 +112,4 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
