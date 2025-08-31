@@ -10,10 +10,12 @@ import PerformanceTracking from "@/components/performance-tracking";
 import InteractiveChecklist from "@/components/interactive-checklist";
 import ResourcesSection from "@/components/resources-section";
 import Footer from "@/components/footer";
+import StructuredData from "@/components/structured-data";
 
 export default function Home() {
   return (
     <div className="font-inter bg-gray-50 text-gray-900 min-h-screen">
+      <StructuredData />
       <Header />
       <HeroSection />
       <OverviewStats />
