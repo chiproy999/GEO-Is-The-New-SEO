@@ -3,6 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Scroll positioning for fixed header */
+section[id] {
+  scroll-margin-top: 5rem; /* 80px - accounts for header height + padding */
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --background: hsl(0, 0%, 100%);
   --foreground: hsl(20, 14.3%, 4.1%);
