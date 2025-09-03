@@ -1,11 +1,12 @@
-import { users, checklistProgress, type User, type InsertUser, type ChecklistProgress, type InsertChecklistProgress } from "@shared/schema";
+import { users, checklistProgress, type User, type UpsertUser, type ChecklistProgress, type InsertChecklistProgress } from "@shared/schema";
 import { db } from "./db";
 import { eq, and } from "drizzle-orm";
 
 export interface IStorage {
+  // User operations for Replit Auth
   getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  upsertUser(user: UpsertUser): Promise<User>;
+  // Checklist operations
   getChecklistProgress(userId?: string, category?: string): Promise<ChecklistProgress[]>;
   updateChecklistItem(progress: InsertChecklistProgress & { userId?: string }): Promise<ChecklistProgress>;
   getUserProgress(userId?: string): Promise<{ [category: string]: { completed: number; total: number } }>;
@@ -17,15 +18,17 @@ export class DatabaseStorage implements IStorage {
     return user || undefined;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.username, username));
-    return user || undefined;
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
+  async upsertUser(userData: UpsertUser): Promise<User> {
     const [user] = await db
       .insert(users)
-      .values(insertUser)
+      .values(userData)
+      .onConflictDoUpdate({
+        target: users.id,
+        set: {
+          ...userData,
+          updatedAt: new Date(),
+        },
+      })
       .returning();
     return user;
   }

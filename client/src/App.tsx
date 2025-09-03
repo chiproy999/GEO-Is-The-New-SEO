@@ -5,17 +5,27 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
+import Landing from "@/pages/landing";
+import { useAuth } from "@/hooks/useAuth";
 import { useEffect } from "react";
 import { initGA } from "./lib/analytics";
 import { useAnalytics } from "./hooks/use-analytics";
 
 function Router() {
+  const { isAuthenticated, isLoading } = useAuth();
+  
   // Track page views when routes change
   useAnalytics();
   
   return (
     <Switch>
-      <Route path="/" component={Home} />
+      {isLoading || !isAuthenticated ? (
+        <Route path="/" component={Landing} />
+      ) : (
+        <>
+          <Route path="/" component={Home} />
+        </>
+      )}
       <Route component={NotFound} />
     </Switch>
   );

@@ -1,10 +1,12 @@
-import { Bot, Menu, X } from "lucide-react";
+import { Bot, Menu, X, LogOut, User } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { scrollToElement } from "@/lib/scroll-utils";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user, isAuthenticated } = useAuth();
 
   const scrollToSection = (id: string) => {
     scrollToElement(id);
@@ -48,6 +50,27 @@ export default function Header() {
               >
                 Checklist
               </button>
+              
+              {isAuthenticated && (
+                <div className="flex items-center space-x-3 ml-6 pl-6 border-l border-gray-200">
+                  <div className="flex items-center space-x-2">
+                    <User className="h-4 w-4 text-gray-500" />
+                    <span className="text-sm text-gray-600">
+                      {user?.firstName || user?.email || 'User'}
+                    </span>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => window.location.href = '/api/logout'}
+                    className="text-gray-500 hover:text-gray-700"
+                    data-testid="logout-button"
+                  >
+                    <LogOut className="h-4 w-4 mr-1" />
+                    Logout
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
           

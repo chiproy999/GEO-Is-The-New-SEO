@@ -1,17 +1,23 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import { useAuth } from "@/hooks/useAuth";
 import type { ChecklistProgress } from "@shared/schema";
 
-export function useChecklist(userId?: string) {
+export function useChecklist() {
+  const { user, isAuthenticated } = useAuth();
   const queryClient = useQueryClient();
+
+  const userId = user?.id;
 
   const { data: progress = [], isLoading } = useQuery<ChecklistProgress[]>({
     queryKey: ['/api/checklist/progress', userId],
+    enabled: isAuthenticated,
   });
 
   const { data: summary = {} } = useQuery<{[category: string]: { completed: number; total: number }}>({
     queryKey: ['/api/checklist/summary', userId],
+    enabled: isAuthenticated,
   });
 
   const updateMutation = useMutation({
