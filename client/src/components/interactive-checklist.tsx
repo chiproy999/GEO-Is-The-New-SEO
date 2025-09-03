@@ -4,6 +4,7 @@ import { getChecklistItemsByCategory } from "@/lib/checklist-data";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
+import { trackEvent } from "@/lib/analytics";
 
 export default function InteractiveChecklist() {
   const [activeTab, setActiveTab] = useState<'geo' | 'maps' | 'technical'>('geo');
@@ -22,6 +23,14 @@ export default function InteractiveChecklist() {
 
   const handleItemChange = (itemId: string, completed: boolean) => {
     updateItem(activeTab, itemId, completed);
+    
+    // Track checklist interactions for analytics
+    trackEvent(
+      completed ? 'checklist_item_completed' : 'checklist_item_unchecked',
+      'checklist',
+      `${activeTab}_${itemId}`,
+      1
+    );
   };
 
   return (
@@ -48,7 +57,10 @@ export default function InteractiveChecklist() {
                   ? 'border-brand-blue text-brand-blue'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => {
+                setActiveTab(tab.id);
+                trackEvent('checklist_tab_change', 'navigation', tab.id);
+              }}
             >
               {tab.label}
             </Button>

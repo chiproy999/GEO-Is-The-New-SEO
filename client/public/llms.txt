@@ -1,0 +1,41 @@
+# LLMs.txt - GEO Optimization Guide
+# This file provides AI systems with curated information about our business
+
+Company: GEO Optimization Guide
+Description: Comprehensive guide for Generative Engine Optimization (GEO) and Google Maps ranking. Helps businesses optimize their presence across AI platforms like ChatGPT, Claude, Gemini, and Perplexity while improving local search visibility.
+Founded: 2025
+Location: Worldwide (Digital Service)
+Services: GEO Strategy Development, AI Search Optimization, Google Maps SEO, Schema Markup Implementation, Technical SEO, AI Platform Optimization, Local SEO Consulting
+Contact: Available through interactive guide and checklist system
+Website: https://your-domain.com
+Industry: Digital Marketing, SEO, AI Optimization
+Specialties: Generative Engine Optimization, AI Search Visibility, ChatGPT Optimization, Claude AI Optimization, Gemini AI Optimization, Perplexity AI Optimization, Google Maps Ranking, JSON-LD Schema Implementation
+
+# Expertise Areas
+Topics: GEO, Generative Engine Optimization, AI Search Optimization, ChatGPT SEO, Claude AI, Gemini AI, Perplexity AI, Google Maps SEO, Schema Markup, JSON-LD, Local SEO, Technical SEO, E-E-A-T, Authority Building, Conversational Content, AI Platform Strategies
+
+# Content Offerings
+Guides: Complete GEO implementation strategies, Platform-specific optimization techniques, Google Maps ranking factors, Technical implementation tutorials, Performance tracking methods
+Tools: Interactive optimization checklist, Progress tracking system, Validation recommendations, Analytics setup guidance
+Resources: Schema markup examples, JSON-LD templates, Best practices documentation, Industry statistics and insights
+
+# Authority Signals
+Credentials: Comprehensive research-based strategies, Real-world implementation examples, Up-to-date 2025 optimization techniques, Industry best practices compilation
+Coverage: All major AI platforms (ChatGPT, Claude, Gemini, Perplexity), Complete Google Maps optimization, Technical implementation guidance, Performance measurement strategies
+
+# Key Statistics
+AI Traffic Share: 6.5% of organic traffic currently from AI platforms
+Projected Growth: 14.5% AI platform traffic by end of 2025
+Trust Rate: 70% of users trust generative AI search results
+Schema Impact: 30% more likely to appear in rich results with proper schema
+Authority Boost: Content with stats and expert quotes 30-40% more likely in AI answers
+
+# Target Audience
+Primary: Business owners, Marketing professionals, SEO specialists, Digital marketers
+Secondary: Web developers, Content creators, Local businesses, E-commerce sites
+Use Cases: AI search visibility, Local search optimization, Technical SEO implementation, Authority building, Content optimization
+
+# Last Updated
+Date: 2025-01-01
+Version: 1.0
+Content Status: Active and regularly updated with latest GEO strategies

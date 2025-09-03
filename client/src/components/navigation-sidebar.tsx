@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { scrollToElement, getCurrentSection, debugNavigation } from "@/lib/scroll-utils";
+import { trackEvent } from "@/lib/analytics";
 
 export default function NavigationSidebar() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
   const scrollToSection = (id: string) => {
     scrollToElement(id);
+    // Track section navigation for analytics
+    trackEvent('section_navigation', 'navigation', id);
   };
 
   // Track active section for highlighting

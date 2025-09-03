@@ -11,14 +11,19 @@ import InteractiveChecklist from "@/components/interactive-checklist";
 import ResourcesSection from "@/components/resources-section";
 import Footer from "@/components/footer";
 import StructuredData from "@/components/structured-data";
+import PageBreadcrumbs from "@/components/page-breadcrumbs";
+import ValidationBadges from "@/components/validation-badges";
+import AuthoritySection from "@/components/authority-section";
 
 export default function Home() {
   return (
     <div className="font-inter bg-gray-50 text-gray-900 min-h-screen">
       <StructuredData />
       <Header />
+      <PageBreadcrumbs />
       <HeroSection />
       <OverviewStats />
+      <ValidationBadges />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="lg:grid lg:grid-cols-4 lg:gap-8">
@@ -31,6 +36,7 @@ export default function Home() {
             <TechnicalImplementation />
             <PerformanceTracking />
             <InteractiveChecklist />
+            <AuthoritySection />
             <ResourcesSection />
           </div>
         </div>
