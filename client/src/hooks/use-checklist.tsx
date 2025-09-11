@@ -24,7 +24,80 @@ export function useChecklist() {
       const response = await apiRequest('POST', '/api/checklist/progress', data);
       return response.json();
     },
-    onSuccess: () => {
+    onMutate: async (variables) => {
+      // Cancel any outgoing refetches
+      await queryClient.cancelQueries({ queryKey: ['/api/checklist/progress'] });
+      await queryClient.cancelQueries({ queryKey: ['/api/checklist/summary'] });
+
+      // Snapshot the previous value
+      const previousProgress = queryClient.getQueryData<ChecklistProgress[]>(['/api/checklist/progress']);
+      const previousSummary = queryClient.getQueryData(['/api/checklist/summary']);
+
+      // Optimistically update progress
+      if (previousProgress) {
+        const existingIndex = previousProgress.findIndex(
+          p => p.category === variables.category && p.itemId === variables.itemId
+        );
+        
+        let newProgress = [...previousProgress];
+        if (existingIndex >= 0) {
+          // Update existing item
+          newProgress[existingIndex] = {
+            ...newProgress[existingIndex],
+            completed: variables.completed
+          };
+        } else {
+          // Add new item (optimistic)
+          newProgress.push({
+            id: `temp-${Date.now()}`,
+            userId: user?.id || 'temp-user',
+            category: variables.category,
+            itemId: variables.itemId,
+            completed: variables.completed,
+            completedAt: variables.completed ? new Date() : null
+          });
+        }
+        queryClient.setQueryData(['/api/checklist/progress'], newProgress);
+
+        // Also optimistically update the summary
+        if (previousSummary) {
+          const updatedSummary = { ...previousSummary };
+          const categoryData = updatedSummary[variables.category] || { completed: 0, total: 6 };
+          
+          if (existingIndex >= 0) {
+            // Existing item - check if completion status changed
+            const wasCompleted = previousProgress[existingIndex].completed;
+            if (variables.completed && !wasCompleted) {
+              categoryData.completed += 1;
+            } else if (!variables.completed && wasCompleted) {
+              categoryData.completed -= 1;
+            }
+          } else {
+            // New item - increment if completed
+            if (variables.completed) {
+              categoryData.completed += 1;
+            }
+          }
+          
+          updatedSummary[variables.category] = categoryData;
+          queryClient.setQueryData(['/api/checklist/summary'], updatedSummary);
+        }
+      }
+
+      // Return a context object with the snapshotted value
+      return { previousProgress, previousSummary };
+    },
+    onError: (err, newData, context) => {
+      // Rollback on error
+      if (context?.previousProgress) {
+        queryClient.setQueryData(['/api/checklist/progress'], context.previousProgress);
+      }
+      if (context?.previousSummary) {
+        queryClient.setQueryData(['/api/checklist/summary'], context.previousSummary);
+      }
+    },
+    onSettled: () => {
+      // Always refetch after error or success
       queryClient.invalidateQueries({ queryKey: ['/api/checklist/progress'] });
       queryClient.invalidateQueries({ queryKey: ['/api/checklist/summary'] });
     },

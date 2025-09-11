@@ -8,9 +8,9 @@ export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
   upsertUser(user: UpsertUser): Promise<User>;
   // Checklist operations
-  getChecklistProgress(userId?: string, category?: string): Promise<ChecklistProgress[]>;
-  updateChecklistItem(progress: InsertChecklistProgress & { userId?: string }): Promise<ChecklistProgress>;
-  getUserProgress(userId?: string): Promise<{ [category: string]: { completed: number; total: number } }>;
+  getChecklistProgress(userId: string, category?: string): Promise<ChecklistProgress[]>;
+  updateChecklistItem(progress: InsertChecklistProgress & { userId: string }): Promise<ChecklistProgress>;
+  getUserProgress(userId: string): Promise<{ [category: string]: { completed: number; total: number } }>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -34,32 +34,23 @@ export class DatabaseStorage implements IStorage {
     return user;
   }
 
-  async getChecklistProgress(userId?: string, category?: string): Promise<ChecklistProgress[]> {
-    let query = db.select().from(checklistProgress);
-    
-    const conditions = [];
-    if (userId) {
-      conditions.push(eq(checklistProgress.userId, userId));
-    }
+  async getChecklistProgress(userId: string, category?: string): Promise<ChecklistProgress[]> {
+    const conditions = [eq(checklistProgress.userId, userId)];
     if (category) {
       conditions.push(eq(checklistProgress.category, category));
     }
     
-    if (conditions.length > 0) {
-      query = query.where(and(...conditions));
-    }
-    
-    return await query;
+    return await db.select().from(checklistProgress).where(and(...conditions));
   }
 
-  async updateChecklistItem(progressData: InsertChecklistProgress & { userId?: string }): Promise<ChecklistProgress> {
+  async updateChecklistItem(progressData: InsertChecklistProgress & { userId: string }): Promise<ChecklistProgress> {
     // Check if item already exists
     const [existing] = await db
       .select()
       .from(checklistProgress)
       .where(
         and(
-          eq(checklistProgress.userId, progressData.userId || null),
+          eq(checklistProgress.userId, progressData.userId),
           eq(checklistProgress.category, progressData.category),
           eq(checklistProgress.itemId, progressData.itemId)
         )
@@ -81,7 +72,7 @@ export class DatabaseStorage implements IStorage {
       const [newProgress] = await db
         .insert(checklistProgress)
         .values({
-          userId: progressData.userId || null,
+          userId: progressData.userId,
           category: progressData.category,
           itemId: progressData.itemId,
           completed: progressData.completed,
@@ -92,7 +83,7 @@ export class DatabaseStorage implements IStorage {
     }
   }
 
-  async getUserProgress(userId?: string): Promise<{ [category: string]: { completed: number; total: number } }> {
+  async getUserProgress(userId: string): Promise<{ [category: string]: { completed: number; total: number } }> {
     // Get dynamic totals from shared checklist data
     const totalCounts = getChecklistTotals();
 

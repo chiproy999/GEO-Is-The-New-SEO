@@ -128,6 +128,26 @@ export async function setupAuth(app: Express) {
   });
 }
 
+// CSRF protection middleware for unsafe methods
+export const csrfProtection: RequestHandler = (req, res, next) => {
+  // Only apply CSRF protection to unsafe methods
+  if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(req.method)) {
+    const origin = req.get('Origin');
+    const referer = req.get('Referer');
+    const host = req.get('Host');
+    
+    // Check if request has valid origin or referer matching our host
+    const validOrigin = origin && origin === `${req.protocol}://${host}`;
+    const validReferer = referer && new URL(referer).host === host;
+    
+    if (!validOrigin && !validReferer) {
+      return res.status(403).json({ message: 'CSRF protection: Invalid origin' });
+    }
+  }
+  
+  next();
+};
+
 export const isAuthenticated: RequestHandler = async (req, res, next) => {
   const user = req.user as any;
 

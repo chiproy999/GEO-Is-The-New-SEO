@@ -2,12 +2,15 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertChecklistProgressSchema } from "@shared/schema";
-import { setupAuth, isAuthenticated } from "./replitAuth";
+import { setupAuth, isAuthenticated, csrfProtection } from "./replitAuth";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Auth middleware
   await setupAuth(app);
+  
+  // CSRF protection for unsafe methods
+  app.use(csrfProtection);
 
   // Auth routes
   app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
@@ -37,7 +40,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/checklist/progress", isAuthenticated, async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
-      const validatedData = insertChecklistProgressSchema.parse(req.body);
+      // Validate request body excluding userId since it comes from auth session
+      const validatedData = insertChecklistProgressSchema.omit({ userId: true }).parse(req.body);
       
       const progress = await storage.updateChecklistItem({
         ...validatedData,
@@ -45,6 +49,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
       res.json(progress);
     } catch (error: any) {
+      console.error('Checklist progress update error:', error);
       res.status(400).json({ message: error.message });
     }
   });

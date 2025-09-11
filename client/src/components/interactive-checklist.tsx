@@ -88,6 +88,7 @@ export default function InteractiveChecklist() {
                     onCheckedChange={(checked) => handleItemChange(item.id, !!checked)}
                     disabled={isUpdating}
                     className="h-4 w-4"
+                    data-testid={`checkbox-${item.id}`}
                   />
                 </div>
                 <div className="flex-1 min-w-0">
