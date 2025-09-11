@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useChecklist } from "@/hooks/use-checklist";
-import { getChecklistItemsByCategory } from "@/lib/checklist-data";
+import { getChecklistItemsByCategory } from "@shared/checklist-data";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";

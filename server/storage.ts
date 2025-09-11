@@ -1,4 +1,5 @@
 import { users, checklistProgress, type User, type UpsertUser, type ChecklistProgress, type InsertChecklistProgress } from "@shared/schema";
+import { getChecklistTotals } from "@shared/checklist-data";
 import { db } from "./db";
 import { eq, and } from "drizzle-orm";
 
@@ -92,12 +93,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getUserProgress(userId?: string): Promise<{ [category: string]: { completed: number; total: number } }> {
-    // Return fixed data for total counts based on the checklist items
-    const totalCounts = {
-      'geo': 6,
-      'maps': 6,
-      'technical': 6
-    };
+    // Get dynamic totals from shared checklist data
+    const totalCounts = getChecklistTotals();
 
     const userProgress = await this.getChecklistProgress(userId);
     const result: { [category: string]: { completed: number; total: number } } = {};
@@ -107,7 +104,7 @@ export class DatabaseStorage implements IStorage {
       const completed = categoryProgress.filter(p => p.completed).length;
       result[category] = {
         completed,
-        total: totalCounts[category as keyof typeof totalCounts]
+        total: totalCounts[category]
       };
     }
 

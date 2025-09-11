@@ -22,9 +22,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
   
   // Get checklist progress
-  app.get("/api/checklist/progress", async (req, res) => {
+  app.get("/api/checklist/progress", isAuthenticated, async (req: any, res) => {
     try {
-      const { userId, category } = req.query as { userId?: string; category?: string };
+      const userId = req.user.claims.sub;
+      const { category } = req.query as { category?: string };
       const progress = await storage.getChecklistProgress(userId, category);
       res.json(progress);
     } catch (error: any) {
@@ -33,13 +34,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Update checklist item
-  app.post("/api/checklist/progress", async (req, res) => {
+  app.post("/api/checklist/progress", isAuthenticated, async (req: any, res) => {
     try {
-      const validatedData = insertChecklistProgressSchema.extend({
-        userId: z.string().optional()
-      }).parse(req.body);
+      const userId = req.user.claims.sub;
+      const validatedData = insertChecklistProgressSchema.parse(req.body);
       
-      const progress = await storage.updateChecklistItem(validatedData);
+      const progress = await storage.updateChecklistItem({
+        ...validatedData,
+        userId
+      });
       res.json(progress);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
@@ -47,9 +50,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Get user progress summary
-  app.get("/api/checklist/summary", async (req, res) => {
+  app.get("/api/checklist/summary", isAuthenticated, async (req: any, res) => {
     try {
-      const { userId } = req.query as { userId?: string };
+      const userId = req.user.claims.sub;
       const summary = await storage.getUserProgress(userId);
       res.json(summary);
     } catch (error: any) {

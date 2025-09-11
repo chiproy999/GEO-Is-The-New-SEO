@@ -8,20 +8,19 @@ export function useChecklist() {
   const { user, isAuthenticated } = useAuth();
   const queryClient = useQueryClient();
 
-  const userId = user?.id;
 
   const { data: progress = [], isLoading } = useQuery<ChecklistProgress[]>({
-    queryKey: ['/api/checklist/progress', userId],
+    queryKey: ['/api/checklist/progress'],
     enabled: isAuthenticated,
   });
 
   const { data: summary = {} } = useQuery<{[category: string]: { completed: number; total: number }}>({
-    queryKey: ['/api/checklist/summary', userId],
+    queryKey: ['/api/checklist/summary'],
     enabled: isAuthenticated,
   });
 
   const updateMutation = useMutation({
-    mutationFn: async (data: { category: string; itemId: string; completed: boolean; userId?: string }) => {
+    mutationFn: async (data: { category: string; itemId: string; completed: boolean }) => {
       const response = await apiRequest('POST', '/api/checklist/progress', data);
       return response.json();
     },
@@ -36,7 +35,7 @@ export function useChecklist() {
   };
 
   const updateItem = (category: string, itemId: string, completed: boolean) => {
-    updateMutation.mutate({ category, itemId, completed, userId });
+    updateMutation.mutate({ category, itemId, completed });
   };
 
   const getCategoryProgress = (category: string) => {

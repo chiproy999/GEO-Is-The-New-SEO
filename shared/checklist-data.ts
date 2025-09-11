@@ -124,3 +124,11 @@ export const checklistData: ChecklistItem[] = [
 export const getChecklistItemsByCategory = (category: 'geo' | 'maps' | 'technical') => {
   return checklistData.filter(item => item.category === category);
 };
+
+export const getChecklistTotals = () => {
+  const totals: { [category: string]: number } = {};
+  checklistData.forEach(item => {
+    totals[item.category] = (totals[item.category] || 0) + 1;
+  });
+  return totals;
+};

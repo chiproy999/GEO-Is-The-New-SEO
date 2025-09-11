@@ -29,12 +29,15 @@ export const users = pgTable("users", {
 
 export const checklistProgress = pgTable("checklist_progress", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  userId: varchar("user_id").references(() => users.id),
+  userId: varchar("user_id").notNull().references(() => users.id),
   category: text("category").notNull(), // 'geo', 'maps', 'technical'
   itemId: text("item_id").notNull(),
   completed: boolean("completed").default(false),
   completedAt: timestamp("completed_at"),
-});
+}, (table) => [
+  index("idx_checklist_user_category").on(table.userId, table.category),
+  index("idx_checklist_user_item").on(table.userId, table.itemId),
+]);
 
 export const insertChecklistProgressSchema = createInsertSchema(checklistProgress).omit({
   id: true,
