@@ -1,6 +1,7 @@
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import StructuredData from "@/components/structured-data";
+import SEOHead from "@/components/seo-head";
 import PageBreadcrumbs from "@/components/page-breadcrumbs";
 import ValidationBadges from "@/components/validation-badges";
 import { Search, CheckCircle, Target, Clock } from "lucide-react";
@@ -8,6 +9,12 @@ import { Search, CheckCircle, Target, Clock } from "lucide-react";
 export default function PerplexityPage() {
   return (
     <div className="font-inter bg-gray-50 text-gray-900 min-h-screen">
+      <SEOHead 
+        title="Perplexity AI Optimization | Rank in AI Answer Engine Results - 2025"
+        description="Master Perplexity AI optimization with research-focused strategies. Learn real-time content updates, comprehensive citation systems, and academic-style formatting for AI ranking."
+        keywords={["Perplexity AI optimization", "Perplexity search ranking", "AI answer engine SEO", "research-focused content", "real-time optimization", "citation-heavy content", "academic AI optimization", "Perplexity visibility"]}
+        type="article"
+      />
       <StructuredData />
       <Header />
       <PageBreadcrumbs />

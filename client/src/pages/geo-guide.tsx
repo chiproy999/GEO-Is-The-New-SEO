@@ -2,13 +2,20 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import GeoGuide from "@/components/geo-guide";
 import StructuredData from "@/components/structured-data";
+import SEOHead from "@/components/seo-head";
 import PageBreadcrumbs from "@/components/page-breadcrumbs";
 import ValidationBadges from "@/components/validation-badges";
 
 export default function GeoGuidePage() {
   return (
     <div className="font-inter bg-gray-50 text-gray-900 min-h-screen">
-      <StructuredData />
+      <SEOHead 
+        title="Complete Generative Engine Optimization Guide | ChatGPT, Claude & More - GEO Guide 2025"
+        description="Master GEO strategies for ChatGPT, Claude, Gemini, and Perplexity. Learn authority building, content optimization, and technical implementation that drives 14.5% of organic traffic."
+        keywords={["Generative Engine Optimization", "GEO guide", "ChatGPT optimization", "Claude AI SEO", "Gemini AI ranking", "Perplexity optimization", "AI search optimization", "conversational content", "authority signals", "schema markup"]}
+        type="article"
+      />
+      <StructuredData pageType="guide" title="Complete GEO Optimization Guide" description="Master Generative Engine Optimization for ChatGPT, Claude, Gemini, and Perplexity. Learn the strategies that drive 14.5% of organic traffic in 2025." />
       <Header />
       <PageBreadcrumbs />
       

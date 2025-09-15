@@ -4,6 +4,7 @@ import OverviewStats from "@/components/overview-stats";
 import ResourcesSection from "@/components/resources-section";
 import Footer from "@/components/footer";
 import StructuredData from "@/components/structured-data";
+import SEOHead from "@/components/seo-head";
 import PageBreadcrumbs from "@/components/page-breadcrumbs";
 import ValidationBadges from "@/components/validation-badges";
 import AuthoritySection from "@/components/authority-section";
@@ -75,6 +76,12 @@ export default function Home() {
 
   return (
     <div className="font-inter bg-gray-50 text-gray-900 min-h-screen">
+      <SEOHead 
+        title="GEO Optimization Guide 2025 - Master AI Search Rankings | Future-Proof Your Business"
+        description="Master Generative Engine Optimization (GEO) and Google Maps ranking with our comprehensive guide. Future-proof your business for ChatGPT, Claude, Gemini, and Perplexity AI with actionable strategies and interactive checklists."
+        keywords={["GEO", "Generative Engine Optimization", "AI Search Optimization", "ChatGPT SEO", "Claude AI", "Gemini AI", "Google Maps SEO", "Schema Markup", "JSON-LD", "AI Search Results", "Perplexity AI", "Local SEO"]}
+        type="website"
+      />
       <StructuredData />
       <Header />
       <PageBreadcrumbs />

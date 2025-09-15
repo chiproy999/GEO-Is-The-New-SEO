@@ -1,6 +1,7 @@
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import StructuredData from "@/components/structured-data";
+import SEOHead from "@/components/seo-head";
 import PageBreadcrumbs from "@/components/page-breadcrumbs";
 import ValidationBadges from "@/components/validation-badges";
 import { Gem, CheckCircle, Target, Image } from "lucide-react";
@@ -8,6 +9,12 @@ import { Gem, CheckCircle, Target, Image } from "lucide-react";
 export default function GeminiPage() {
   return (
     <div className="font-inter bg-gray-50 text-gray-900 min-h-screen">
+      <SEOHead 
+        title="Google Gemini SEO Guide | Optimize for Bard AI Search Results - 2025"
+        description="Optimize for Google Gemini with multimodal content strategies. Learn visual search optimization, Google ecosystem integration, and rich media techniques for Bard AI."
+        keywords={["Google Gemini optimization", "Bard AI SEO", "Gemini search ranking", "multimodal content", "visual search optimization", "Google AI visibility", "Bard optimization", "Google ecosystem SEO"]}
+        type="article"
+      />
       <StructuredData />
       <Header />
       <PageBreadcrumbs />

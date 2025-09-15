@@ -58,61 +58,6 @@ export default function StructuredData({
       }
     };
 
-    // Article Schema for the main guide
-    const articleSchema = {
-      "@context": "https://schema.org",
-      "@type": ["Article", "Guide"],
-      "headline": title,
-      "description": description,
-      "author": {
-        "@type": "Organization",
-        "name": "GEO Optimization Guide"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "GEO Optimization Guide",
-        "logo": {
-          "@type": "ImageObject",
-          "url": `${window.location.origin}/favicon.ico`
-        }
-      },
-      "datePublished": "2025-01-01",
-      "dateModified": new Date().toISOString().split('T')[0],
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": window.location.href
-      },
-      "articleSection": "SEO and AI Optimization",
-      "keywords": [
-        "GEO",
-        "Generative Engine Optimization", 
-        "AI Search Optimization",
-        "ChatGPT SEO",
-        "Claude AI",
-        "Gemini AI",
-        "Google Maps SEO",
-        "Schema Markup",
-        "JSON-LD",
-        "AI Search Results"
-      ],
-      "about": [
-        {
-          "@type": "Thing",
-          "name": "Generative Engine Optimization",
-          "description": "Optimization techniques for AI-powered search engines"
-        },
-        {
-          "@type": "Thing", 
-          "name": "Google Maps SEO",
-          "description": "Local SEO strategies for Google Maps ranking"
-        },
-        {
-          "@type": "Thing",
-          "name": "Schema Markup",
-          "description": "Structured data implementation for better search visibility"
-        }
-      ]
-    };
 
     // FAQ Schema
     const faqSchema = {
@@ -254,6 +199,134 @@ export default function StructuredData({
       ]
     };
 
+    // Course/LearningResource Schema for educational content
+    const courseSchema = {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": title,
+      "description": description,
+      "provider": {
+        "@type": "Organization",
+        "name": "GEO Optimization Guide",
+        "url": window.location.origin
+      },
+      "educationalLevel": "Intermediate",
+      "teaches": [
+        "Generative Engine Optimization (GEO)",
+        "AI Search Optimization",
+        "Google Maps SEO",
+        "Schema Markup Implementation",
+        "AI Platform Optimization"
+      ],
+      "coursePrerequisites": "Basic understanding of SEO and digital marketing",
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "online",
+        "courseWorkload": "PT2-4H",
+        "instructor": {
+          "@type": "Organization",
+          "name": "GEO Optimization Guide"
+        }
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Search Engine Optimization"
+        },
+        {
+          "@type": "Thing",
+          "name": "Artificial Intelligence"
+        },
+        {
+          "@type": "Thing",
+          "name": "Digital Marketing"
+        }
+      ]
+    };
+
+    // SpecialAnnouncement Schema for timely updates
+    const announcementSchema = {
+      "@context": "https://schema.org",
+      "@type": "SpecialAnnouncement",
+      "name": "Latest GEO and AI Search Optimization Strategies for 2025",
+      "text": "Stay ahead of the curve with the most up-to-date Generative Engine Optimization strategies. Our guide covers the latest techniques for ChatGPT, Claude, Gemini, and Perplexity AI platforms.",
+      "datePosted": new Date().toISOString().split('T')[0],
+      "expires": "2025-12-31",
+      "category": "SEO Updates",
+      "announcementLocation": {
+        "@type": "VirtualLocation",
+        "url": window.location.origin
+      }
+    };
+
+    // ItemList Schema for comprehensive guide structure
+    const itemListSchema = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Complete GEO Optimization Guide Sections",
+      "description": "Comprehensive list of all sections in the GEO optimization guide",
+      "numberOfItems": 8,
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "GEO Fundamentals",
+          "description": "Introduction to Generative Engine Optimization",
+          "url": `${window.location.origin}/geo-guide`
+        },
+        {
+          "@type": "ListItem", 
+          "position": 2,
+          "name": "ChatGPT Optimization",
+          "description": "Specific strategies for OpenAI ChatGPT and SearchGPT",
+          "url": `${window.location.origin}/platforms/chatgpt`
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Claude AI Optimization", 
+          "description": "Research-driven content strategies for Anthropic Claude",
+          "url": `${window.location.origin}/platforms/claude`
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Gemini AI Optimization",
+          "description": "Multimodal content strategies for Google Gemini",
+          "url": `${window.location.origin}/platforms/gemini`
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Perplexity Optimization",
+          "description": "Citation-heavy content for Perplexity AI",
+          "url": `${window.location.origin}/platforms/perplexity`
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Google Maps SEO",
+          "description": "Local business ranking strategies",
+          "url": `${window.location.origin}/maps-guide`
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "Implementation Checklist",
+          "description": "Interactive checklist to track optimization progress",
+          "url": `${window.location.origin}/checklist`
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "name": "Technical Implementation",
+          "description": "Schema markup and technical SEO requirements",
+          "url": `${window.location.origin}/geo-guide#technical-implementation`
+        }
+      ]
+    };
+
     // Function to add or update script tags
     const addJsonLd = (schema: object, id: string) => {
       // Remove existing script if it exists
@@ -273,20 +346,24 @@ export default function StructuredData({
     // Add all schemas
     addJsonLd(organizationSchema, 'organization-schema');
     addJsonLd(websiteSchema, 'website-schema');
-    addJsonLd(articleSchema, 'article-schema');
     addJsonLd(faqSchema, 'faq-schema');
     addJsonLd(howToSchema, 'howto-schema');
     addJsonLd(breadcrumbSchema, 'breadcrumb-schema');
+    addJsonLd(courseSchema, 'course-schema');
+    addJsonLd(announcementSchema, 'announcement-schema');
+    addJsonLd(itemListSchema, 'itemlist-schema');
 
     // Cleanup function to remove schemas when component unmounts
     return () => {
       const schemaIds = [
         'organization-schema',
-        'website-schema', 
-        'article-schema',
+        'website-schema',
         'faq-schema',
         'howto-schema',
-        'breadcrumb-schema'
+        'breadcrumb-schema',
+        'course-schema',
+        'announcement-schema',
+        'itemlist-schema'
       ];
       
       schemaIds.forEach(id => {
