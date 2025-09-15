@@ -7,30 +7,27 @@ import {
   BreadcrumbPage 
 } from "@/components/ui/breadcrumb";
 import { Home } from "lucide-react";
-import { scrollToElement } from "@/lib/scroll-utils";
+import { Link, useLocation } from "wouter";
 
-interface BreadcrumbProps {
-  currentSection?: string;
-}
+export default function PageBreadcrumbs() {
+  const [location] = useLocation();
 
-export default function PageBreadcrumbs({ currentSection }: BreadcrumbProps) {
-  const handleSectionClick = (sectionId: string) => {
-    scrollToElement(sectionId);
-  };
-
-  const getSectionName = (section: string): string => {
-    const sectionNames: { [key: string]: string } = {
-      'overview': 'Overview',
-      'what-is-geo': 'What is GEO?',
-      'geo-strategies': 'GEO Strategies',
-      'platforms': 'Platform Optimization',
-      'maps-ranking': 'Google Maps',
-      'technical': 'Technical Setup',
-      'measurement': 'Performance Tracking',
-      'checklist': 'Interactive Checklist'
+  const getPageName = (path: string): string => {
+    const pageNames: { [key: string]: string } = {
+      '/': 'Home',
+      '/geo-guide': 'GEO Guide',
+      '/maps-guide': 'Maps Guide',
+      '/checklist': 'Checklist',
+      '/platforms/chatgpt': 'ChatGPT Optimization',
+      '/platforms/claude': 'Claude Optimization',
+      '/platforms/gemini': 'Gemini Optimization',
+      '/platforms/perplexity': 'Perplexity Optimization'
     };
-    return sectionNames[section] || section;
+    return pageNames[path] || 'Page';
   };
+
+  const isHomePage = location === '/';
+  const isPlatformPage = location.startsWith('/platforms/');
 
   return (
     <div className="bg-gray-50 border-b border-gray-200 py-3">
@@ -38,21 +35,30 @@ export default function PageBreadcrumbs({ currentSection }: BreadcrumbProps) {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink 
-                className="flex items-center gap-1 hover:text-brand-blue cursor-pointer"
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              >
-                <Home className="h-4 w-4" />
-                GEO Guide
+              <BreadcrumbLink asChild>
+                <Link href="/" className="flex items-center gap-1 hover:text-brand-blue">
+                  <Home className="h-4 w-4" />
+                  GEO Guide
+                </Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             
-            {currentSection && (
+            {!isHomePage && (
               <>
                 <BreadcrumbSeparator />
+                {isPlatformPage && (
+                  <>
+                    <BreadcrumbItem>
+                      <BreadcrumbLink className="text-gray-600">
+                        Platforms
+                      </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                  </>
+                )}
                 <BreadcrumbItem>
                   <BreadcrumbPage className="text-gray-600">
-                    {getSectionName(currentSection)}
+                    {getPageName(location)}
                   </BreadcrumbPage>
                 </BreadcrumbItem>
               </>
