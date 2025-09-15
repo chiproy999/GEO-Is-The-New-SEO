@@ -1,6 +1,7 @@
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import StructuredData from "@/components/structured-data";
+import SEOHead from "@/components/seo-head";
 import PageBreadcrumbs from "@/components/page-breadcrumbs";
 import ValidationBadges from "@/components/validation-badges";
 import { Brain, CheckCircle, Target, BookOpen } from "lucide-react";
@@ -8,6 +9,12 @@ import { Brain, CheckCircle, Target, BookOpen } from "lucide-react";
 export default function ClaudePage() {
   return (
     <div className="font-inter bg-gray-50 text-gray-900 min-h-screen">
+      <SEOHead 
+        title="Claude AI Optimization Strategies | Anthropic Search Rankings Guide - 2025"
+        description="Master Claude AI optimization with research-driven content strategies. Learn citation systems, comprehensive analysis, and accuracy-focused techniques for Anthropic AI."
+        keywords={["Claude AI optimization", "Anthropic AI SEO", "Claude search ranking", "research-driven content", "AI citation optimization", "Anthropic visibility", "Claude AI ranking", "academic AI optimization"]}
+        type="article"
+      />
       <StructuredData />
       <Header />
       <PageBreadcrumbs />

@@ -1,6 +1,7 @@
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import StructuredData from "@/components/structured-data";
+import SEOHead from "@/components/seo-head";
 import PageBreadcrumbs from "@/components/page-breadcrumbs";
 import ValidationBadges from "@/components/validation-badges";
 import { Bot, CheckCircle, Target, MessageSquare } from "lucide-react";
@@ -8,6 +9,12 @@ import { Bot, CheckCircle, Target, MessageSquare } from "lucide-react";
 export default function ChatGPTPage() {
   return (
     <div className="font-inter bg-gray-50 text-gray-900 min-h-screen">
+      <SEOHead 
+        title="ChatGPT SEO Optimization Guide | Rank Higher in AI Search Results - 2025"
+        description="Learn proven ChatGPT optimization strategies. Master conversational content, step-by-step instructions, and technical implementation to dominate OpenAI SearchGPT rankings."
+        keywords={["ChatGPT SEO", "SearchGPT optimization", "OpenAI search", "conversational content", "AI chatbot optimization", "ChatGPT ranking", "OpenAI visibility", "AI search optimization"]}
+        type="article"
+      />
       <StructuredData />
       <Header />
       <PageBreadcrumbs />

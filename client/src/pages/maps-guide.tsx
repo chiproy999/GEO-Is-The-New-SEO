@@ -2,13 +2,20 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import MapsGuide from "@/components/maps-guide";
 import StructuredData from "@/components/structured-data";
+import SEOHead from "@/components/seo-head";
 import PageBreadcrumbs from "@/components/page-breadcrumbs";
 import ValidationBadges from "@/components/validation-badges";
 
 export default function MapsGuidePage() {
   return (
     <div className="font-inter bg-gray-50 text-gray-900 min-h-screen">
-      <StructuredData />
+      <SEOHead 
+        title="Google Maps SEO Ranking Guide 2025 | Local Business Optimization Strategies"
+        description="Dominate local search with proven Google Maps optimization strategies. Master relevance, distance, and prominence factors to rank #1 in local search results for your business."
+        keywords={["Google Maps SEO", "local SEO", "Google Business Profile", "local rankings", "Google Maps optimization", "local search marketing", "business listing optimization", "NAP consistency", "review management", "local citations"]}
+        type="article"
+      />
+      <StructuredData pageType="guide" title="Google Maps Ranking Guide" description="Dominate local search with proven Google Maps optimization strategies. Master relevance, distance, and prominence factors for 2025." />
       <Header />
       <PageBreadcrumbs />
       

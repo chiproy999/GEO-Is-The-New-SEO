@@ -16,6 +16,13 @@ export default function Header() {
     { label: "Checklist", path: "/checklist" },
   ];
 
+  const platformMenuItems = [
+    { label: "ChatGPT", path: "/platforms/chatgpt" },
+    { label: "Claude", path: "/platforms/claude" },
+    { label: "Gemini", path: "/platforms/gemini" },
+    { label: "Perplexity", path: "/platforms/perplexity" },
+  ];
+
   const isActivePath = (path: string) => {
     return location === path;
   };
