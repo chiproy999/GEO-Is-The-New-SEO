@@ -13,6 +13,7 @@ import ChatGPTPage from "@/pages/platforms/chatgpt";
 import ClaudePage from "@/pages/platforms/claude";
 import GeminiPage from "@/pages/platforms/gemini";
 import PerplexityPage from "@/pages/platforms/perplexity";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import { useAuth } from "@/hooks/useAuth";
 import { useEffect } from "react";
 import { initGA } from "./lib/analytics";
@@ -26,20 +27,36 @@ function Router() {
   
   return (
     <Switch>
-      {isLoading || !isAuthenticated ? (
-        <Route path="/" component={Landing} />
-      ) : (
-        <>
-          <Route path="/" component={Home} />
-          <Route path="/geo-guide" component={GeoGuidePage} />
-          <Route path="/maps-guide" component={MapsGuidePage} />
-          <Route path="/checklist" component={ChecklistPage} />
-          <Route path="/platforms/chatgpt" component={ChatGPTPage} />
-          <Route path="/platforms/claude" component={ClaudePage} />
-          <Route path="/platforms/gemini" component={GeminiPage} />
-          <Route path="/platforms/perplexity" component={PerplexityPage} />
-        </>
-      )}
+      {/* Root route - authenticated users see Home, others see Landing */}
+      <Route path="/" component={() => {
+        if (isLoading) {
+          return (
+            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                <p className="text-gray-600">Loading...</p>
+              </div>
+            </div>
+          );
+        }
+        return isAuthenticated ? <Home /> : <Landing />;
+      }} />
+      
+      {/* Public content pages - always accessible for SEO */}
+      <Route path="/geo-guide" component={GeoGuidePage} />
+      <Route path="/maps-guide" component={MapsGuidePage} />
+      <Route path="/platforms/chatgpt" component={ChatGPTPage} />
+      <Route path="/platforms/claude" component={ClaudePage} />
+      <Route path="/platforms/gemini" component={GeminiPage} />
+      <Route path="/platforms/perplexity" component={PerplexityPage} />
+      
+      {/* Protected routes - require authentication */}
+      <Route path="/checklist" component={() => (
+        <ProtectedRoute>
+          <ChecklistPage />
+        </ProtectedRoute>
+      )} />
+      
       <Route component={NotFound} />
     </Switch>
   );
