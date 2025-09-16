@@ -18,6 +18,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { useEffect } from "react";
 import { initGA } from "./lib/analytics";
 import { useAnalytics } from "./hooks/use-analytics";
+import ExitIntentModal from "@/components/exit-intent-modal";
+import FloatingCTAButton from "@/components/floating-cta-button";
 
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -78,6 +80,8 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <Router />
+        <ExitIntentModal />
+        <FloatingCTAButton />
       </TooltipProvider>
     </QueryClientProvider>
   );

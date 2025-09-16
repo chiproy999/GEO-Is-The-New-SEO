@@ -1,4 +1,5 @@
 import { Target, MapPin, Star, Camera, MessageSquare, CheckCircle } from "lucide-react";
+import ContentUpgradeForm from "./content-upgrade-form";
 
 export default function MapsGuide() {
   return (
@@ -10,6 +11,14 @@ export default function MapsGuide() {
           Google evaluates local businesses based on three primary factors that determine your ranking in local search results.
         </p>
       </div>
+
+      {/* Content Upgrade After Introduction */}
+      <ContentUpgradeForm 
+        source="maps-guide-intro" 
+        variant="inline"
+        title="Want to Rank #1 on Google Maps?"
+        description="Download our complete local SEO checklist with 37 proven optimization tactics"
+      />
 
       {/* Core Ranking Factors */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -124,6 +133,14 @@ export default function MapsGuide() {
           </div>
         </div>
       </div>
+      
+      {/* Featured Content Upgrade at End */}
+      <ContentUpgradeForm 
+        source="maps-guide-end" 
+        variant="featured"
+        title="Master Google Maps Ranking in 2025"
+        description="Get instant access to our complete optimization toolkit trusted by 12,847+ local businesses"
+      />
     </section>
   );
 }
