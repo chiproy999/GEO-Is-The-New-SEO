@@ -13,6 +13,7 @@ import ChatGPTPage from "@/pages/platforms/chatgpt";
 import ClaudePage from "@/pages/platforms/claude";
 import GeminiPage from "@/pages/platforms/gemini";
 import PerplexityPage from "@/pages/platforms/perplexity";
+import PricingPage from "@/pages/pricing";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { useAuth } from "@/hooks/useAuth";
 import { useEffect } from "react";
@@ -45,6 +46,7 @@ function Router() {
       }} />
       
       {/* Public content pages - always accessible for SEO */}
+      <Route path="/pricing" component={PricingPage} />
       <Route path="/geo-guide" component={GeoGuidePage} />
       <Route path="/maps-guide" component={MapsGuidePage} />
       <Route path="/platforms/chatgpt" component={ChatGPTPage} />

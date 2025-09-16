@@ -14,6 +14,7 @@ export default function Header() {
     { label: "GEO Guide", path: "/geo-guide" },
     { label: "Maps Guide", path: "/maps-guide" },
     { label: "Checklist", path: "/checklist" },
+    { label: "Pricing", path: "/pricing" },
   ];
 
   const platformMenuItems = [
