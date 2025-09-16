@@ -84,3 +84,35 @@ export type ChecklistProgress = typeof checklistProgress.$inferSelect;
 export type InsertChecklistProgress = z.infer<typeof insertChecklistProgressSchema>;
 export type BlogPost = typeof blogPosts.$inferSelect;
 export type InsertBlogPost = z.infer<typeof insertBlogPostSchema>;
+
+// Email subscribers table for lead capture
+export const emailSubscribers = pgTable("email_subscribers", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  email: varchar("email").unique().notNull(),
+  name: varchar("name"),
+  source: text("source").notNull(), // 'hero', 'exit', 'content', 'floating', 'checklist'
+  leadMagnet: text("lead_magnet").notNull().default('geo-audit-checklist'),
+  ipAddress: varchar("ip_address"),
+  userAgent: text("user_agent"),
+  referrer: text("referrer"),
+  verified: boolean("verified").default(false),
+  unsubscribed: boolean("unsubscribed").default(false),
+  subscribedAt: timestamp("subscribed_at").defaultNow(),
+  unsubscribedAt: timestamp("unsubscribed_at"),
+}, (table) => [
+  index("idx_subscriber_email").on(table.email),
+  index("idx_subscriber_source").on(table.source),
+  index("idx_subscriber_subscribed").on(table.subscribedAt),
+]);
+
+export const insertEmailSubscriberSchema = createInsertSchema(emailSubscribers).omit({
+  id: true,
+  subscribedAt: true,
+  unsubscribedAt: true,
+}).extend({
+  email: z.string().email("Please enter a valid email address"),
+  name: z.string().min(1, "Please enter your name").optional(),
+});
+
+export type EmailSubscriber = typeof emailSubscribers.$inferSelect;
+export type InsertEmailSubscriber = z.infer<typeof insertEmailSubscriberSchema>;

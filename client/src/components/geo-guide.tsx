@@ -1,4 +1,5 @@
 import { Lightbulb, MessageCircle, Award, Code, Target } from "lucide-react";
+import ContentUpgradeForm from "./content-upgrade-form";
 
 export default function GeoGuide() {
   return (
@@ -44,6 +45,14 @@ export default function GeoGuide() {
           </ul>
         </div>
       </section>
+
+      {/* Content Upgrade After First Section */}
+      <ContentUpgradeForm 
+        source="geo-guide-what-is" 
+        variant="inline"
+        title="Ready to Master GEO?"
+        description="Get our complete 37-point optimization checklist used by industry leaders"
+      />
 
       {/* Core GEO Strategies */}
       <section id="geo-strategies" className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
@@ -122,6 +131,14 @@ export default function GeoGuide() {
           </div>
         </div>
       </section>
+      
+      {/* Featured Content Upgrade at End */}
+      <ContentUpgradeForm 
+        source="geo-guide-end" 
+        variant="featured"
+        title="Transform Your GEO Strategy Today"
+        description="Join thousands of businesses using our proven framework to dominate AI search results"
+      />
     </>
   );
 }
