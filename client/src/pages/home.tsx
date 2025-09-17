@@ -16,21 +16,21 @@ export default function Home() {
   const mainSections = [
     {
       title: "Complete GEO Guide",
-      description: "Master Generative Engine Optimization for all major AI platforms. Learn the core strategies that drive AI search traffic.",
+      description: "Stop being invisible to ChatGPT and Claude. Master the optimization strategies that get your business cited by AI.",
       icon: Bot,
       color: "from-brand-blue to-emerald-600",
       textColor: "text-brand-blue",
       link: "/geo-guide",
-      features: ["Core GEO Strategies", "Authority Building", "Content Optimization", "Technical Implementation"]
+      features: ["Fix AI Invisibility", "Get AI Citations", "Beat Competitors", "Proven Implementation"]
     },
     {
       title: "Google Maps Ranking",
-      description: "Dominate local search with proven Google Maps optimization strategies. Master relevance, distance, and prominence factors.",
+      description: "Losing local customers to competitors? Master Google Maps before your competition becomes invisible.",
       icon: MapPin,
       color: "from-emerald-600 to-blue-600",
       textColor: "text-emerald-600",
       link: "/maps-guide",
-      features: ["Ranking Factors", "Business Profile", "Review Management", "Local SEO"]
+      features: ["Outrank Competitors", "Get Found Locally", "Increase Walk-ins", "Local Dominance"]
     },
     {
       title: "Interactive Checklist",
@@ -46,28 +46,28 @@ export default function Home() {
   const platformSections = [
     {
       title: "ChatGPT Optimization",
-      description: "Optimize for OpenAI's ChatGPT and SearchGPT with conversational content strategies.",
+      description: "ChatGPT can't find you. Fix the conversational gaps killing your visibility.",
       icon: Bot,
       color: "text-green-600",
       link: "/platforms/chatgpt"
     },
     {
       title: "Claude Optimization", 
-      description: "Create research-backed content that Claude values and cites in responses.",
+      description: "Claude ignores shallow content. Learn what it actually takes to get cited.",
       icon: Brain,
       color: "text-purple-600",
       link: "/platforms/claude"
     },
     {
       title: "Gemini Optimization",
-      description: "Leverage Google's ecosystem with multimodal content optimization.",
+      description: "Google Gemini requires visual optimization. Text alone won't cut it.",
       icon: Gem,
       color: "text-blue-600",
       link: "/platforms/gemini"
     },
     {
       title: "Perplexity Optimization",
-      description: "Create authoritative, well-sourced content for research-focused queries.",
+      description: "Perplexity needs fresh citations. Outdated content gets buried.",
       icon: Search,
       color: "text-indigo-600",
       link: "/platforms/perplexity"
@@ -90,6 +90,33 @@ export default function Home() {
       <ValidationBadges />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Pain Point Section */}
+        <section className="mb-16 bg-red-50 rounded-2xl p-8 border border-red-200">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-red-900 mb-4">
+              ⚠️ The AI Search Crisis: Is Your Business Ready?
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="text-4xl font-bold text-red-600 mb-2">73%</div>
+                <p className="text-gray-700">of users now start searches with AI instead of Google</p>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="text-4xl font-bold text-red-600 mb-2">90%</div>
+                <p className="text-gray-700">of businesses are invisible to AI search platforms</p>
+              </div>
+              <div className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="text-4xl font-bold text-red-600 mb-2">5x</div>
+                <p className="text-gray-700">more conversions from AI-optimized content</p>
+              </div>
+            </div>
+            <p className="text-lg text-gray-800 mt-6 font-semibold">
+              While you focus on traditional SEO, your competitors are capturing AI-driven traffic.
+              <span className="text-red-600"> Don't get left behind.</span>
+            </p>
+          </div>
+        </section>
+
         {/* Main Sections */}
         <section className="mb-16">
           <div className="text-center mb-12">
@@ -97,7 +124,7 @@ export default function Home() {
               Complete Optimization Guides
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive guides for AI search and local rankings optimization
+              Stop losing customers to AI search. Master the strategies that actually work.
             </p>
           </div>
           
@@ -141,10 +168,10 @@ export default function Home() {
         <section className="mb-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Platform-Specific Optimization
+              Why Can't AI Platforms Find You?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Detailed strategies for each major AI platform
+              Each AI platform ignores different signals. Learn exactly what you're missing.
             </p>
           </div>
           

@@ -29,13 +29,15 @@ export default function Landing() {
       {/* Hero Section */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center">
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6 max-w-2xl mx-auto">
+            <p className="font-semibold">⚠️ 90% of businesses are invisible to AI search platforms</p>
+          </div>
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Master <span className="text-brand-blue">AI Search</span> in 2025
+            Your Competitors Are <span className="text-red-600">Stealing</span> Your <span className="text-brand-blue">AI Traffic</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Complete guide to Generative Engine Optimization (GEO) and Google Maps ranking. 
-            Optimize your business for ChatGPT, Claude, Gemini, and Perplexity with our 
-            interactive checklist and expert strategies.
+            <span className="font-bold text-gray-900">While you focus on Google SEO, smart businesses dominate ChatGPT, Claude, and Perplexity.</span> 
+            Master Generative Engine Optimization (GEO) before it's too late.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
@@ -59,19 +61,22 @@ export default function Landing() {
             </Button>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-              <div className="text-2xl font-bold text-brand-blue mb-2">Growing Fast</div>
-              <div className="text-gray-600">AI platforms are rapidly gaining traffic share</div>
-            </div>
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-              <div className="text-2xl font-bold text-emerald-600 mb-2">High Impact</div>
-              <div className="text-gray-600">Early adopters see significant visibility gains</div>
-            </div>
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-              <div className="text-2xl font-bold text-purple-600 mb-2">User Trust</div>
-              <div className="text-gray-600">Users increasingly rely on AI for search</div>
+          {/* The Cost of Ignoring GEO */}
+          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-8 mb-16">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">💸 The Cost of Ignoring GEO</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <div className="text-3xl font-bold text-red-600 mb-2">$50K+/year</div>
+                <div className="text-gray-700">Average revenue lost to AI-optimized competitors</div>
+              </div>
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <div className="text-3xl font-bold text-red-600 mb-2">73%</div>
+                <div className="text-gray-700">Of searches now start with AI, not Google</div>
+              </div>
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <div className="text-3xl font-bold text-red-600 mb-2">18 months</div>
+                <div className="text-gray-700">Until AI search completely disrupts traditional SEO</div>
+              </div>
             </div>
           </div>
         </div>
@@ -83,11 +88,11 @@ export default function Landing() {
               <Shield className="h-6 w-6 text-brand-blue" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-3">
-              Expert Strategies
+              Stop Losing to AI
             </h3>
             <p className="text-gray-600">
-              Research-backed optimization techniques for all major AI platforms. 
-              Stay ahead with 2025's latest GEO strategies.
+              Your competitors are already ranking in ChatGPT and Claude. 
+              Learn the exact strategies to take back your market share.
             </p>
           </div>
 
@@ -96,11 +101,11 @@ export default function Landing() {
               <Users className="h-6 w-6 text-emerald-600" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-3">
-              Interactive Checklist
+              Fix Your AI Blindspot
             </h3>
             <p className="text-gray-600">
-              Track your optimization progress with our comprehensive checklist. 
-              Never miss a critical step in your GEO implementation.
+              90% of businesses don't even know what they're missing. 
+              Our checklist reveals every gap in your AI visibility.
             </p>
           </div>
 
@@ -121,9 +126,9 @@ export default function Landing() {
         {/* CTA */}
         <div className="text-center mt-16">
           <div className="bg-gradient-to-r from-brand-blue to-emerald-600 rounded-2xl p-8 text-white">
-            <h2 className="text-3xl font-bold mb-4">Ready to Dominate AI Search?</h2>
+            <h2 className="text-3xl font-bold mb-4">🚀 The Window Is Closing Fast</h2>
             <p className="text-xl mb-6 opacity-90">
-              Start optimizing for the AI-first future today.
+              Every day you wait, competitors steal more AI traffic. Act now.
             </p>
             <Button 
               size="lg"

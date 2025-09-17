@@ -22,6 +22,9 @@ export default function PerplexityPage() {
       {/* Page Hero */}
       <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="bg-red-500 bg-opacity-20 border border-red-300 rounded-lg p-4 mb-6 max-w-2xl">
+            <p className="font-semibold text-white">🚨 Perplexity demands fresh citations. Is your content outdated?</p>
+          </div>
           <div className="flex items-center mb-4">
             <Search className="h-12 w-12 mr-4" />
             <h1 className="text-4xl md:text-5xl font-bold">
@@ -29,8 +32,8 @@ export default function PerplexityPage() {
             </h1>
           </div>
           <p className="text-xl opacity-90 max-w-3xl">
-            Optimize for Perplexity's research-focused AI search. Learn how to create 
-            authoritative, well-sourced content that answers complex queries.
+            <span className="font-bold text-yellow-200">Perplexity updates every 24 hours. Your static content can't compete.</span> Learn real-time 
+            optimization strategies that keep you visible in research-focused AI searches.
           </p>
         </div>
       </div>

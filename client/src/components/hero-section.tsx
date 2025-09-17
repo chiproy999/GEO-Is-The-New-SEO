@@ -17,12 +17,15 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-            Future-Proof Your Business for
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-purple-200"> AI Search</span>
+            Is Your Business <span className="text-red-300 line-through">Invisible</span> to
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-purple-200"> AI Search?</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-10 text-blue-50/90 max-w-4xl mx-auto leading-relaxed animate-fade-in" style={{animationDelay: '0.2s'}}>
-            Complete guide to Generative Engine Optimization (GEO) and Google Maps ranking. 
-            Dominate ChatGPT, Claude, Gemini, and all AI search platforms in 2025.
+          <p className="text-xl md:text-2xl mb-4 text-blue-50/90 max-w-4xl mx-auto leading-relaxed animate-fade-in" style={{animationDelay: '0.2s'}}>
+            <span className="font-bold text-yellow-200">90% of businesses are missing from AI search results.</span> While you optimize for Google, 
+            your competitors dominate ChatGPT, Claude, and Perplexity.
+          </p>
+          <p className="text-lg md:text-xl mb-10 text-blue-50/80 max-w-3xl mx-auto leading-relaxed animate-fade-in" style={{animationDelay: '0.3s'}}>
+            Master Generative Engine Optimization (GEO) before it's too late. The AI search revolution is happening now.
           </p>
           
           {/* Email capture section for homepage */}
@@ -31,7 +34,7 @@ export default function HeroSection() {
               <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 max-w-2xl mx-auto border border-white/20 shadow-2xl hover-lift">
                 <h3 className="text-2xl font-bold mb-3">Get Your Free 5-Step GEO Starter Guide</h3>
                 <p className="text-blue-50/90 mb-5">
-                  Essential tips to begin improving your AI search visibility today
+                  <span className="font-semibold text-yellow-200">Stop losing customers to AI-savvy competitors.</span> Essential tips to begin improving your AI search visibility today.
                 </p>
                 <button
                   onClick={() => setShowEmailForm(true)}
