@@ -84,8 +84,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           success: true,
           message: "You're already subscribed!",
           leadMagnet: {
-            type: 'checklist',
-            name: 'GEO Quick Start Checklist',
+            type: 'guide',
+            name: '5-Step GEO Starter Guide',
             downloadUrl: '/api/download/geo-checklist'
           }
         });
@@ -101,10 +101,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       res.json({
         success: true,
-        message: "Success! Check your email for your free checklist.",
+        message: "Success! Check your email for your free guide.",
         leadMagnet: {
-          type: 'checklist',
-          name: 'GEO Audit Checklist 2025',
+          type: 'guide',
+          name: '5-Step GEO Starter Guide',
           downloadUrl: '/api/download/geo-checklist'
         }
       });
@@ -115,8 +115,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           success: true,
           message: "You're already subscribed!",
           leadMagnet: {
-            type: 'checklist',
-            name: 'GEO Quick Start Checklist',
+            type: 'guide',
+            name: '5-Step GEO Starter Guide',
             downloadUrl: '/api/download/geo-checklist'
           }
         });
@@ -138,8 +138,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ 
         subscribed: !!subscriber && !subscriber.unsubscribed,
         leadMagnet: subscriber ? {
-          type: 'checklist',
-          name: 'GEO Audit Checklist 2025',
+          type: 'guide',
+          name: '5-Step GEO Starter Guide',
           downloadUrl: '/api/download/geo-checklist'
         } : null
       });
@@ -152,28 +152,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/download/geo-checklist", (req, res) => {
     // Return a comprehensive checklist as JSON that frontend can render
     res.json({
-      title: "GEO Quick Start Checklist",
-      description: "Essential tips to improve your AI search visibility",
+      title: "5-Step GEO Starter Guide",
+      description: "Begin your journey to better AI search visibility",
       categories: [
         {
-          name: "Essential GEO Checklist",
+          name: "Your 5 Quick Steps",
           items: [
-            "Create clear, conversational content that answers questions directly",
-            "Add structured data (Schema.org) to your website",
-            "Claim and verify your Google Business Profile",
-            "Build credibility with author pages and About Us content",
-            "Include citations and sources for important claims",
-            "Optimize for mobile devices and fast loading",
-            "Create FAQ sections for common questions",
-            "Use semantic keywords naturally in content",
-            "Add high-quality images with descriptive alt text",
-            "Monitor your appearance in AI search results",
-            "Keep NAP (Name, Address, Phone) consistent across the web",
-            "Respond to reviews and engage with your audience"
+            "Step 1: Write conversational content that answers questions",
+            "Step 2: Add your business to Google My Business",
+            "Step 3: Create an About Us page with your expertise",
+            "Step 4: Make your website mobile-friendly",
+            "Step 5: Add frequently asked questions to your site"
           ]
         }
       ],
-      footer: "For more optimization strategies, explore our guides and resources"
+      footer: "Want to go deeper? Explore our comprehensive guides and advanced strategies."
     });
   });
 

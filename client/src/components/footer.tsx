@@ -18,16 +18,18 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gray-900 text-white py-12 mt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 mt-20 overflow-hidden">
+      {/* Subtle animated background */}
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/5 to-transparent opacity-50" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand Section */}
           <div className="text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start mb-4">
               <Bot className="h-8 w-8 text-brand-blue mr-3" />
-              <span className="text-xl font-bold">GEO Optimization Guide</span>
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">GEO Optimization Guide</span>
             </div>
-            <p className="text-gray-400">Future-proof your business for the AI search revolution</p>
+            <p className="text-gray-400 leading-relaxed">Future-proof your business for the AI search revolution</p>
           </div>
 
           {/* Quick Links */}
@@ -38,7 +40,7 @@ export default function Footer() {
                 <li key={link.path}>
                   <Link 
                     href={link.path}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-gray-400 hover:text-white transition-all duration-200 hover:translate-x-1 inline-block"
                     data-testid={`footer-${link.path.replace('/', '') || 'home'}`}
                   >
                     {link.label}
@@ -56,7 +58,7 @@ export default function Footer() {
                 <li key={link.path}>
                   <Link 
                     href={link.path}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-gray-400 hover:text-white transition-all duration-200 hover:translate-x-1 inline-block"
                     data-testid={`footer-platform-${link.label.toLowerCase()}`}
                   >
                     {link.label}
@@ -67,9 +69,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 text-center">
-          <div className="text-sm text-gray-500">
-            © 2025 GEO Optimization Guide. Updated with the latest 2025 strategies and trends.
+        <div className="border-t border-gray-700/50 pt-10 text-center">
+          <div className="text-sm text-gray-400">
+            © 2025 GEO Optimization Guide. Continuously updated with the latest AI search strategies.
           </div>
         </div>
       </div>
