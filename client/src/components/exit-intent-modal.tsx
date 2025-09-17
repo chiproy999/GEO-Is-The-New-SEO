@@ -111,33 +111,29 @@ export default function ExitIntentModal() {
             <Gift className="h-12 w-12 text-brand-blue" />
           </div>
           <DialogTitle className="text-2xl font-bold">
-            Before You Go...
+            Wait! Don't Leave Empty-Handed
           </DialogTitle>
           <DialogDescription className="text-gray-600 text-base mt-2">
-            Get our free GEO Quick Start Checklist with practical optimization tips 
-            to improve your AI search visibility.
+            Get our free 5-Step GEO Starter Guide to begin improving 
+            your AI search visibility today.
           </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-4">
-          <div className="bg-gradient-to-r from-emerald-50 to-blue-50 rounded-lg p-4">
-            <h4 className="font-semibold text-gray-900 mb-2">What You'll Get Instantly:</h4>
-            <ul className="space-y-1 text-sm text-gray-700">
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4">
+            <h4 className="font-semibold text-gray-900 mb-2">Your Free 5-Step Guide Includes:</h4>
+            <ul className="space-y-2 text-sm text-gray-700">
               <li className="flex items-start">
-                <span className="text-emerald-600 mr-2">✓</span>
-                Complete GEO optimization checklist
+                <span className="text-blue-600 mr-2">→</span>
+                5 essential steps to get started with GEO
               </li>
               <li className="flex items-start">
-                <span className="text-emerald-600 mr-2">✓</span>
-                Platform-specific strategies for ChatGPT, Claude & more
+                <span className="text-blue-600 mr-2">→</span>
+                Quick tips for immediate improvements
               </li>
               <li className="flex items-start">
-                <span className="text-emerald-600 mr-2">✓</span>
-                Google Maps ranking factors scorecard
-              </li>
-              <li className="flex items-start">
-                <span className="text-emerald-600 mr-2">✓</span>
-                Technical implementation templates
+                <span className="text-blue-600 mr-2">→</span>
+                Simple action items you can implement today
               </li>
             </ul>
           </div>
@@ -145,7 +141,7 @@ export default function ExitIntentModal() {
           <EmailCaptureForm
             source="exit"
             variant="minimal"
-            buttonText="Get Free Checklist"
+            buttonText="Get Free Guide"
             onSuccess={handleSuccess}
           />
           

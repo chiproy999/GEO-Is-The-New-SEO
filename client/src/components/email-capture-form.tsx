@@ -29,8 +29,8 @@ interface SubscriptionResponse {
 export default function EmailCaptureForm({ 
   source, 
   variant = 'default',
-  title = "Get Your Free GEO Quick Start Checklist",
-  description = "Essential optimization tips for AI search visibility",
+  title = "Get Your Free 5-Step GEO Starter Guide",
+  description = "Simple tips to begin improving your AI search visibility",
   buttonText = "Get Instant Access",
   showName = false,
   onSuccess
@@ -88,7 +88,7 @@ export default function EmailCaptureForm({
       email,
       name: showName ? name : undefined,
       source,
-      leadMagnet: 'geo-audit-checklist'
+      leadMagnet: 'geo-starter-guide'
     });
   };
 
@@ -99,7 +99,7 @@ export default function EmailCaptureForm({
           <CheckCircle2 className="h-12 w-12 text-green-500" />
         </div>
         <h3 className="text-lg font-semibold text-gray-900">You're All Set!</h3>
-        <p className="text-gray-600">Check your email for your free GEO Quick Start Checklist.</p>
+        <p className="text-gray-600">Check your email for your free 5-Step GEO Starter Guide.</p>
         {downloadUrl && (
           <Button
             onClick={() => window.open(downloadUrl, '_blank')}
@@ -107,7 +107,7 @@ export default function EmailCaptureForm({
             data-testid="button-download-checklist"
           >
             <Download className="mr-2 h-4 w-4" />
-            Download Checklist Now
+            Download Guide Now
           </Button>
         )}
       </div>
