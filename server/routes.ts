@@ -85,7 +85,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           message: "You're already subscribed!",
           leadMagnet: {
             type: 'checklist',
-            name: 'GEO Audit Checklist 2025',
+            name: 'GEO Quick Start Checklist',
             downloadUrl: '/api/download/geo-checklist'
           }
         });
@@ -116,7 +116,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           message: "You're already subscribed!",
           leadMagnet: {
             type: 'checklist',
-            name: 'GEO Audit Checklist 2025',
+            name: 'GEO Quick Start Checklist',
             downloadUrl: '/api/download/geo-checklist'
           }
         });
@@ -152,71 +152,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/download/geo-checklist", (req, res) => {
     // Return a comprehensive checklist as JSON that frontend can render
     res.json({
-      title: "GEO Audit Checklist 2025 - 37 Essential Optimization Points",
-      description: "Your complete roadmap to dominating AI search results",
+      title: "GEO Quick Start Checklist",
+      description: "Essential tips to improve your AI search visibility",
       categories: [
         {
-          name: "Authority Building",
+          name: "Essential GEO Checklist",
           items: [
-            "Claim and verify all business profiles (Google, Bing, Apple Maps)",
-            "Add E-E-A-T signals to author pages",
-            "Create detailed About Us page with credentials",
-            "Implement proper author schema markup",
-            "Build quality backlinks from authoritative sources",
-            "Establish topical authority in your niche",
-            "Add trust signals (certifications, awards, testimonials)"
-          ]
-        },
-        {
-          name: "Content Optimization",
-          items: [
-            "Write conversational, natural language content",
-            "Include specific facts, statistics, and citations",
-            "Create comprehensive FAQ sections",
-            "Add clear, direct answers to common questions",
-            "Use semantic keywords naturally",
-            "Optimize for featured snippets",
-            "Include supporting images and videos"
-          ]
-        },
-        {
-          name: "Technical Implementation",
-          items: [
-            "Implement JSON-LD structured data",
-            "Add Organization schema",
-            "Include Product/Service schema where applicable",
-            "Set up FAQ schema markup",
-            "Optimize Core Web Vitals",
-            "Ensure mobile responsiveness",
-            "Enable HTTPS across entire site"
-          ]
-        },
-        {
-          name: "Local & Maps Optimization",
-          items: [
-            "Complete Google Business Profile 100%",
-            "Add high-quality photos and videos",
-            "Respond to all reviews within 24 hours",
-            "Maintain NAP consistency across web",
-            "Build local citations",
-            "Create location-specific landing pages",
-            "Implement local business schema"
-          ]
-        },
-        {
-          name: "AI Platform Specific",
-          items: [
-            "Optimize for ChatGPT with conversational content",
-            "Create research-backed content for Claude",
-            "Add visual content for Gemini multimodal",
-            "Include authoritative citations for Perplexity",
-            "Monitor AI search appearances",
-            "Test content in each platform",
-            "Track and measure AI traffic"
+            "Create clear, conversational content that answers questions directly",
+            "Add structured data (Schema.org) to your website",
+            "Claim and verify your Google Business Profile",
+            "Build credibility with author pages and About Us content",
+            "Include citations and sources for important claims",
+            "Optimize for mobile devices and fast loading",
+            "Create FAQ sections for common questions",
+            "Use semantic keywords naturally in content",
+            "Add high-quality images with descriptive alt text",
+            "Monitor your appearance in AI search results",
+            "Keep NAP (Name, Address, Phone) consistent across the web",
+            "Respond to reviews and engage with your audience"
           ]
         }
       ],
-      footer: "© 2025 GEO Optimization Guide - Visit us for more insights at geoguide.com"
+      footer: "For more optimization strategies, explore our guides and resources"
     });
   });
 

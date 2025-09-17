@@ -31,7 +31,7 @@ const pricingTiers: PricingTier[] = [
     priceAnnual: 0,
     description: "Perfect for getting started with AI optimization",
     features: [
-      "Basic 18-point checklist",
+      "Basic optimization checklist",
       "Access to all guides",
       "Community support forum",
       "Monthly newsletter",
@@ -48,7 +48,7 @@ const pricingTiers: PricingTier[] = [
     description: "Ideal for serious marketers and small businesses",
     features: [
       "Everything in FREE",
-      "Advanced 100+ point checklist",
+      "Advanced optimization checklist",
       "Weekly AI platform updates",
       "30+ downloadable templates",
       "Priority email support",
@@ -178,7 +178,7 @@ export default function PricingPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <Badge className="mb-4 bg-blue-100 text-blue-700" variant="secondary">
               <Star className="h-3 w-3 mr-1" />
-              Trusted by 10,000+ marketers
+              Trusted by marketers worldwide
             </Badge>
             
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4" data-testid="pricing-title">
@@ -373,25 +373,10 @@ export default function PricingPage() {
         <section className="py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Trusted by Industry Leaders</h2>
-              <div className="flex items-center justify-center gap-8 flex-wrap">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600">10,000+</div>
-                  <div className="text-sm text-gray-600">Active Members</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-green-600">4.9/5</div>
-                  <div className="text-sm text-gray-600">Average Rating</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-600">97%</div>
-                  <div className="text-sm text-gray-600">Success Rate</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-600">50+</div>
-                  <div className="text-sm text-gray-600">Countries</div>
-                </div>
-              </div>
+              <h2 className="text-3xl font-bold mb-4">Join Our Growing Community</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Businesses around the world are using our strategies to improve their AI search visibility.
+              </p>
             </div>
           </div>
         </section>
@@ -425,7 +410,7 @@ export default function PricingPage() {
               Ready to Future-Proof Your Business?
             </h2>
             <p className="text-xl mb-8 opacity-90">
-              Join thousands of marketers already winning in the AI search revolution.
+              Start optimizing for AI search today with proven strategies.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Button size="lg" variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100" data-testid="final-cta-free">

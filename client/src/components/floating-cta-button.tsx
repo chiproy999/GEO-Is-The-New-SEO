@@ -94,8 +94,8 @@ export default function FloatingCTAButton() {
                   <FileText className="h-10 w-10 text-brand-blue flex-shrink-0" />
                   <div className="text-left">
                     <p className="text-xs text-gray-500 uppercase tracking-wide font-semibold">Free Download</p>
-                    <p className="text-sm font-bold text-gray-900">GEO Audit Checklist</p>
-                    <p className="text-xs text-gray-600">37 optimization points</p>
+                    <p className="text-sm font-bold text-gray-900">GEO Quick Start Checklist</p>
+                    <p className="text-xs text-gray-600">Essential optimization tips</p>
                   </div>
                   <Button
                     onClick={() => setIsModalOpen(true)}
@@ -141,11 +141,11 @@ export default function FloatingCTAButton() {
               <FileText className="h-12 w-12 text-brand-blue" />
             </div>
             <DialogTitle className="text-2xl font-bold">
-              Your Free GEO Audit Checklist
+              Your Free GEO Quick Start Checklist
             </DialogTitle>
             <DialogDescription className="text-gray-600 mt-2">
-              Get instant access to the same 37-point optimization checklist we use 
-              with our enterprise clients to dominate AI search results.
+              Get instant access to our optimization checklist with practical tips 
+              to improve your visibility in AI search results.
             </DialogDescription>
           </DialogHeader>
           

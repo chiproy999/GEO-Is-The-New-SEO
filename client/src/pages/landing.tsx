@@ -62,16 +62,16 @@ export default function Landing() {
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-              <div className="text-3xl font-bold text-brand-blue mb-2">6.5%</div>
-              <div className="text-gray-600">Current AI platform traffic share</div>
+              <div className="text-2xl font-bold text-brand-blue mb-2">Growing Fast</div>
+              <div className="text-gray-600">AI platforms are rapidly gaining traffic share</div>
             </div>
             <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-              <div className="text-3xl font-bold text-emerald-600 mb-2">14.5%</div>
-              <div className="text-gray-600">Projected growth by end of 2025</div>
+              <div className="text-2xl font-bold text-emerald-600 mb-2">High Impact</div>
+              <div className="text-gray-600">Early adopters see significant visibility gains</div>
             </div>
             <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-              <div className="text-3xl font-bold text-purple-600 mb-2">70%</div>
-              <div className="text-gray-600">Users trust AI search results</div>
+              <div className="text-2xl font-bold text-purple-600 mb-2">User Trust</div>
+              <div className="text-gray-600">Users increasingly rely on AI for search</div>
             </div>
           </div>
         </div>
@@ -123,7 +123,7 @@ export default function Landing() {
           <div className="bg-gradient-to-r from-brand-blue to-emerald-600 rounded-2xl p-8 text-white">
             <h2 className="text-3xl font-bold mb-4">Ready to Dominate AI Search?</h2>
             <p className="text-xl mb-6 opacity-90">
-              Join thousands of businesses already optimizing for the AI-first future.
+              Start optimizing for the AI-first future today.
             </p>
             <Button 
               size="lg"

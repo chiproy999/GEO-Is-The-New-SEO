@@ -29,8 +29,8 @@ interface SubscriptionResponse {
 export default function EmailCaptureForm({ 
   source, 
   variant = 'default',
-  title = "Get Your Free GEO Audit Checklist",
-  description = "37 essential optimization points to dominate AI search results in 2025",
+  title = "Get Your Free GEO Quick Start Checklist",
+  description = "Essential optimization tips for AI search visibility",
   buttonText = "Get Instant Access",
   showName = false,
   onSuccess
@@ -56,7 +56,7 @@ export default function EmailCaptureForm({
       localStorage.setItem('geo_subscription_date', new Date().toISOString());
       
       toast({
-        title: "Success! 🎉",
+        title: "Success!",
         description: data.message,
       });
       
@@ -98,8 +98,8 @@ export default function EmailCaptureForm({
         <div className="flex items-center justify-center mb-4">
           <CheckCircle2 className="h-12 w-12 text-green-500" />
         </div>
-        <h3 className="text-lg font-semibold text-gray-900">You're All Set! 🎊</h3>
-        <p className="text-gray-600">Check your email for your free GEO Audit Checklist.</p>
+        <h3 className="text-lg font-semibold text-gray-900">You're All Set!</h3>
+        <p className="text-gray-600">Check your email for your free GEO Quick Start Checklist.</p>
         {downloadUrl && (
           <Button
             onClick={() => window.open(downloadUrl, '_blank')}
