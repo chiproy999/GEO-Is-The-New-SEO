@@ -111,11 +111,11 @@ export default function ExitIntentModal() {
             <Gift className="h-12 w-12 text-brand-blue" />
           </div>
           <DialogTitle className="text-2xl font-bold">
-            Wait! Don't Leave Empty-Handed 🎁
+            Before You Go...
           </DialogTitle>
           <DialogDescription className="text-gray-600 text-base mt-2">
-            Get our exclusive GEO Audit Checklist with 37 essential optimization points 
-            that helped our clients increase AI visibility by 240%!
+            Get our free GEO Quick Start Checklist with practical optimization tips 
+            to improve your AI search visibility.
           </DialogDescription>
         </DialogHeader>
         
@@ -125,7 +125,7 @@ export default function ExitIntentModal() {
             <ul className="space-y-1 text-sm text-gray-700">
               <li className="flex items-start">
                 <span className="text-emerald-600 mr-2">✓</span>
-                Complete 37-point GEO optimization checklist
+                Complete GEO optimization checklist
               </li>
               <li className="flex items-start">
                 <span className="text-emerald-600 mr-2">✓</span>
@@ -150,7 +150,7 @@ export default function ExitIntentModal() {
           />
           
           <p className="text-xs text-gray-500 text-center">
-            Join 12,847+ businesses optimizing for AI search
+            No spam, ever. Unsubscribe anytime.
           </p>
         </div>
       </DialogContent>

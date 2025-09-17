@@ -16,7 +16,7 @@ export default function Home() {
   const mainSections = [
     {
       title: "Complete GEO Guide",
-      description: "Master Generative Engine Optimization for all major AI platforms. Learn the core strategies that drive 14.5% of organic traffic.",
+      description: "Master Generative Engine Optimization for all major AI platforms. Learn the core strategies that drive AI search traffic.",
       icon: Bot,
       color: "from-brand-blue to-emerald-600",
       textColor: "text-brand-blue",
@@ -97,7 +97,7 @@ export default function Home() {
               Complete Optimization Guides
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Everything you need to dominate AI search and local rankings in 2025
+              Comprehensive guides for AI search and local rankings optimization
             </p>
           </div>
           
