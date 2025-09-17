@@ -11,6 +11,7 @@ export default function Header() {
 
   const navigationItems = [
     { label: "Overview", path: "/" },
+    { label: "GEO vs SEO", path: "/geo-vs-seo" },
     { label: "GEO Guide", path: "/geo-guide" },
     { label: "Maps Guide", path: "/maps-guide" },
     { label: "Checklist", path: "/checklist" },

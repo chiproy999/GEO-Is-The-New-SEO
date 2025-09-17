@@ -22,6 +22,9 @@ export default function ChatGPTPage() {
       {/* Page Hero */}
       <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="bg-red-500 bg-opacity-20 border border-red-300 rounded-lg p-4 mb-6 max-w-2xl">
+            <p className="font-semibold text-white">🔴 ChatGPT can't find your business. Here's why...</p>
+          </div>
           <div className="flex items-center mb-4">
             <Bot className="h-12 w-12 mr-4" />
             <h1 className="text-4xl md:text-5xl font-bold">
@@ -29,8 +32,8 @@ export default function ChatGPTPage() {
             </h1>
           </div>
           <p className="text-xl opacity-90 max-w-3xl">
-            Master optimization for OpenAI's ChatGPT and SearchGPT. Learn specific strategies 
-            to get your content featured in conversational AI responses.
+            <span className="font-bold text-yellow-200">80% of ChatGPT users never see your content.</span> Your competitors use conversational 
+            optimization to get cited while you remain invisible. Fix this now.
           </p>
         </div>
       </div>

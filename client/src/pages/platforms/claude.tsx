@@ -22,6 +22,9 @@ export default function ClaudePage() {
       {/* Page Hero */}
       <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="bg-red-500 bg-opacity-20 border border-red-300 rounded-lg p-4 mb-6 max-w-2xl">
+            <p className="font-semibold text-white">⚠️ Claude ignores shallow content. Is yours deep enough?</p>
+          </div>
           <div className="flex items-center mb-4">
             <Brain className="h-12 w-12 mr-4" />
             <h1 className="text-4xl md:text-5xl font-bold">
@@ -29,8 +32,8 @@ export default function ClaudePage() {
             </h1>
           </div>
           <p className="text-xl opacity-90 max-w-3xl">
-            Optimize your content for Anthropic's Claude AI. Learn how to create comprehensive, 
-            research-backed content that Claude values and cites.
+            <span className="font-bold text-yellow-200">Claude requires 3x more research depth than Google.</span> Most businesses fail 
+            because they don't understand Claude's citation requirements. Master them here.
           </p>
         </div>
       </div>

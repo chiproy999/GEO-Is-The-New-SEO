@@ -22,6 +22,9 @@ export default function GeminiPage() {
       {/* Page Hero */}
       <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="bg-red-500 bg-opacity-20 border border-red-300 rounded-lg p-4 mb-6 max-w-2xl">
+            <p className="font-semibold text-white">🚨 Gemini needs visual content. Text alone won't work anymore.</p>
+          </div>
           <div className="flex items-center mb-4">
             <Gem className="h-12 w-12 mr-4" />
             <h1 className="text-4xl md:text-5xl font-bold">
@@ -29,8 +32,8 @@ export default function GeminiPage() {
             </h1>
           </div>
           <p className="text-xl opacity-90 max-w-3xl">
-            Optimize for Google's multimodal AI. Learn how to leverage Google's ecosystem 
-            and create content that excels in visual and text-based searches.
+            <span className="font-bold text-yellow-200">Gemini ignores 70% of text-only content.</span> Your competitors use multimodal 
+            optimization while you rely on outdated SEO. Learn the new rules.
           </p>
         </div>
       </div>
