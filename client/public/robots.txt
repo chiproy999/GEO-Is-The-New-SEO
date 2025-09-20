@@ -1,0 +1,55 @@
+User-agent: *
+Allow: /
+
+# Allow all search engines and AI crawlers
+User-agent: GoogleBot
+Allow: /
+
+User-agent: BingBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Disallow admin and API endpoints from web crawlers (not AI crawlers)
+User-agent: *
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /dist/
+
+# Priority pages for AI crawlers
+# Main GEO content pages
+# /
+# /geo-vs-seo
+# /geo-guide
+# /maps-guide
+# /platforms/chatgpt
+# /platforms/claude
+# /platforms/gemini
+# /platforms/perplexity
+# /pricing
+
+# Sitemap location
+Sitemap: https://geo-is-the-new-seo.com/sitemap.xml
+
+# Crawl delay (be respectful to AI crawlers)
+Crawl-delay: 1
