@@ -14,7 +14,7 @@ export function useChecklist() {
     enabled: isAuthenticated,
   });
 
-  const { data: summary = {} } = useQuery<{[category: string]: { completed: number; total: number }}>({
+  const { data: summary = {} } = useQuery<Record<string, { completed: number; total: number }>>({
     queryKey: ['/api/checklist/summary'],
     enabled: isAuthenticated,
   });
@@ -31,7 +31,7 @@ export function useChecklist() {
 
       // Snapshot the previous value
       const previousProgress = queryClient.getQueryData<ChecklistProgress[]>(['/api/checklist/progress']);
-      const previousSummary = queryClient.getQueryData(['/api/checklist/summary']);
+      const previousSummary = queryClient.getQueryData<Record<string, { completed: number; total: number }>>(['/api/checklist/summary']);
 
       // Optimistically update progress
       if (previousProgress) {
