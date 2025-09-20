@@ -81,7 +81,7 @@ ChatGPT's integration with live web data has become more sophisticated:
 ### Technical Implementation
 
 **Schema Markup Enhancements**
-```json
+\`\`\`json
 {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -93,7 +93,7 @@ ChatGPT's integration with live web data has become more sophisticated:
   "dateModified": "2025-01-15T10:00:00Z",
   "expertLevel": "Expert"
 }
-```
+\`\`\`
 
 **Content Structure Best Practices**
 - Lead with clear, direct answers to common questions
@@ -559,16 +559,16 @@ Instead of targeting individual keywords, develop topic clusters that serve both
 **Schema Markup Evolution**
 
 Traditional focus:
-```json
+\`\`\`json
 {
   "@type": "WebPage",
   "name": "Page Title",
   "description": "Meta description"
 }
-```
+\`\`\`
 
 Dual-platform optimization:
-```json
+\`\`\`json
 {
   "@type": "Article",
   "headline": "Natural language title",
@@ -579,13 +579,13 @@ Dual-platform optimization:
   },
   "mainEntity": {
     "@type": "FAQPage",
-    "mainEntity": [...]
+    "mainEntity": []
   },
-  "citation": [...],
+  "citation": [],
   "expertise": "Expert",
   "trustworthiness": "High"
 }
-```
+\`\`\`
 
 ### Measurement & Analytics Framework
 
@@ -804,7 +804,7 @@ Create detailed author bios including:
 
 **2. Content Attribution Strategy**
 
-```html
+\`\`\`html
 <!-- Example author markup -->
 <article>
   <header>
@@ -818,11 +818,11 @@ Create detailed author bios including:
     </div>
   </header>
 </article>
-```
+\`\`\`
 
 **3. Schema Markup for Authority**
 
-```json
+\`\`\`json
 {
   "@type": "Article",
   "author": {
@@ -837,7 +837,7 @@ Create detailed author bios including:
     "knowsAbout": ["Project Management", "Enterprise Software"]
   }
 }
-```
+\`\`\`
 
 ### Authority Building Action Plan
 
@@ -887,9 +887,9 @@ AI systems favor content that includes credible sources and references, yet 78% 
 **2. Expert Quote Integration**
 
 **Authority Quote Framework:**
-```markdown
+\`\`\`markdown
 > "The key to effective project management isn't just the software you choose, but how well it integrates with your team's existing workflows," says Jennifer Martinez, PMP-certified consultant who has led 200+ software implementations at Fortune 500 companies.
-```
+\`\`\`
 
 **3. Data Source Hierarchy**
 
@@ -931,12 +931,12 @@ Most business content is structured for human readers scanning through browsers,
 **1. Hierarchical Information Structure**
 
 **Before: Paragraph-Heavy Format**
-```
+\`\`\`
 Our consulting services include strategic planning, operational optimization, change management, and digital transformation. We work with Fortune 500 companies to improve efficiency and drive growth through proven methodologies developed over 15 years of experience. Our team has expertise in multiple industries including healthcare, finance, and technology.
-```
+\`\`\`
 
 **After: Structured Information Format**
-```
+\`\`\`
 ## Consulting Services
 
 ### Strategic Planning
@@ -958,12 +958,12 @@ Our consulting services include strategic planning, operational optimization, ch
 - 15+ years serving Fortune 500 companies
 - Proven results in healthcare, finance, and technology sectors
 - 95% client satisfaction rate across 200+ projects
-```
+\`\`\`
 
 **2. FAQ-Centric Content Design**
 
 **Strategic FAQ Implementation:**
-```html
+\`\`\`html
 <section class="faq-section">
   <h2>Frequently Asked Questions</h2>
   
@@ -977,7 +977,7 @@ Our consulting services include strategic planning, operational optimization, ch
     <p>We track three key metrics: employee adoption rates (target: 85%+), productivity improvements (average: 25% increase), and process efficiency gains (typical: 30-40% reduction in task completion time).</p>
   </div>
 </section>
-```
+\`\`\`
 
 **3. Scannable Content Patterns**
 
@@ -1019,7 +1019,7 @@ Even excellent content can remain invisible to AI systems without proper technic
 **1. Schema Markup for AI Understanding**
 
 **Article Schema Implementation:**
-```json
+\`\`\`json
 {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -1050,12 +1050,12 @@ Even excellent content can remain invisible to AI systems without proper technic
     ]
   }
 }
-```
+\`\`\`
 
 **2. llms.txt File Implementation**
 
-Create `/llms.txt` in your website root:
-```
+Create \`/llms.txt\` in your website root:
+\`\`\`
 # Company Information for AI Systems
 
 ## Organization
@@ -1091,12 +1091,12 @@ Email: info@wealthwise.com
 - "2025 Investment Outlook Report" (January 2025)
 - "Retirement Planning in Uncertain Times" (December 2024)
 - "Tax-Efficient Portfolio Strategies" (November 2024)
-```
+\`\`\`
 
 **3. Internal Content Architecture**
 
 **Topic Cluster Implementation:**
-```
+\`\`\`
 Main Topic: Investment Strategies
 ├── Portfolio Diversification
 │   ├── Asset Allocation Principles
@@ -1110,7 +1110,7 @@ Main Topic: Investment Strategies
     ├── Tax-Loss Harvesting
     ├── Account Selection Strategies
     └── Estate Planning Integration
-```
+\`\`\`
 
 **4. Technical SEO for AI Platforms**
 
