@@ -15,6 +15,11 @@ import GeminiPage from "@/pages/platforms/gemini";
 import PerplexityPage from "@/pages/platforms/perplexity";
 import PricingPage from "@/pages/pricing";
 import GeoVsSeoPage from "@/pages/geo-vs-seo";
+import PrivacyPage from "@/pages/privacy";
+import ContactPage from "@/pages/contact";
+import BlogPage from "@/pages/blog";
+import ToolsPage from "@/pages/tools";
+import TermsPage from "@/pages/terms";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { useAuth } from "@/hooks/useAuth";
 import { useEffect } from "react";
@@ -55,6 +60,11 @@ function Router() {
       <Route path="/platforms/claude" component={ClaudePage} />
       <Route path="/platforms/gemini" component={GeminiPage} />
       <Route path="/platforms/perplexity" component={PerplexityPage} />
+      <Route path="/privacy" component={PrivacyPage} />
+      <Route path="/contact" component={ContactPage} />
+      <Route path="/blog" component={BlogPage} />
+      <Route path="/tools" component={ToolsPage} />
+      <Route path="/terms" component={TermsPage} />
       
       {/* Protected routes - require authentication */}
       <Route path="/checklist" component={() => (
