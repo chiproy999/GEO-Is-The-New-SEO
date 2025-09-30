@@ -8,12 +8,18 @@ import memoize from "memoizee";
 import connectPg from "connect-pg-simple";
 import { storage } from "./storage";
 
-if (!process.env.REPLIT_DOMAINS) {
-  throw new Error("Environment variable REPLIT_DOMAINS not provided");
+// Check if we're in a development environment without Replit
+const isReplitEnvironment = process.env.REPLIT_DOMAINS && process.env.REPL_ID;
+
+if (!isReplitEnvironment) {
+  console.warn("⚠️  REPLIT_DOMAINS not set. Running in development mode without authentication.");
 }
 
 const getOidcConfig = memoize(
   async () => {
+    if (!isReplitEnvironment) {
+      throw new Error("OIDC not available in development mode");
+    }
     return await client.discovery(
       new URL(process.env.ISSUER_URL ?? "https://replit.com/oidc"),
       process.env.REPL_ID!
@@ -24,6 +30,22 @@ const getOidcConfig = memoize(
 
 export function getSession() {
   const sessionTtl = 7 * 24 * 60 * 60 * 1000; // 1 week
+  
+  if (!isReplitEnvironment) {
+    // Use memory store for development
+    return session({
+      secret: process.env.SESSION_SECRET || 'dev-secret-change-me',
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        httpOnly: true,
+        secure: false, // Allow http in development
+        maxAge: sessionTtl,
+        sameSite: 'lax',
+      },
+    });
+  }
+  
   const pgStore = connectPg(session);
   const sessionStore = new pgStore({
     conString: process.env.DATABASE_URL,
@@ -72,6 +94,23 @@ export async function setupAuth(app: Express) {
   app.use(getSession());
   app.use(passport.initialize());
   app.use(passport.session());
+
+  if (!isReplitEnvironment) {
+    // Development mode - set up minimal auth routes
+    app.get("/api/login", (req, res) => {
+      res.json({ message: "Authentication not available in development mode" });
+    });
+    
+    app.get("/api/callback", (req, res) => {
+      res.redirect("/");
+    });
+    
+    app.get("/api/logout", (req, res) => {
+      res.redirect("/");
+    });
+    
+    return;
+  }
 
   const config = await getOidcConfig();
 
@@ -149,6 +188,14 @@ export const csrfProtection: RequestHandler = (req, res, next) => {
 };
 
 export const isAuthenticated: RequestHandler = async (req, res, next) => {
+  if (!isReplitEnvironment) {
+    // In development mode, skip authentication
+    (req as any).user = {
+      claims: { sub: 'dev-user' }
+    };
+    return next();
+  }
+
   const user = req.user as any;
 
   if (!req.isAuthenticated() || !user.expires_at) {

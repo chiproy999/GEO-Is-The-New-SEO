@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import SEOHead from "@/components/seo-head";
@@ -188,44 +187,6 @@ export default function ContactPage() {
                     Send Message
                   </button>
                 </form>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="py-16 bg-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-              Frequently Asked Questions
-            </h2>
-            
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                  How quickly can you help optimize my content for AI search?
-                </h3>
-                <p className="text-gray-600">
-                  Most GEO optimization projects can be completed within 1-2 weeks, depending on the scope and complexity of your content.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                  Do you offer ongoing support after optimization?
-                </h3>
-                <p className="text-gray-600">
-                  Yes! We provide ongoing monitoring and optimization services to ensure your content continues to perform well as AI search algorithms evolve.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                  What types of businesses benefit most from GEO?
-                </h3>
-                <p className="text-gray-600">
-                  Local businesses, service providers, e-commerce sites, and content creators all see significant benefits from proper GEO implementation.
-                </p>
               </div>
             </div>
           </div>
