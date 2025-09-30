@@ -1,9 +1,7 @@
-import { useEffect } from 'react';
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import SEOHead from "@/components/seo-head";
 import { Calendar, FileText, Shield, Users } from 'lucide-react';
-
 export default function TermsPage() {
   return (
     <>
@@ -217,4 +215,5 @@ export default function TermsPage() {
       </div>
     </>
   );
+}
 }

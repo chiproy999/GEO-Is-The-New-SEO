@@ -4,3 +4,7 @@ dist
 server/public
 vite.config.ts.*
 *.tar.gznode_modules/
+
+# Development SQLite database
+dev.db
+dev.db-*

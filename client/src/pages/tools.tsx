@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import SEOHead from "@/components/seo-head";
@@ -127,92 +126,6 @@ export default function ToolsPage() {
           </div>
         </section>
 
-        {/* Business Tools */}
-        <section className="py-16 bg-white">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-              Business Optimization Tools
-            </h2>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Google My Business */}
-              <div className="bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-shadow">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
-                      <Star className="h-5 w-5 text-red-600" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-gray-900">Google My Business</h3>
-                  </div>
-                  <ExternalLink className="h-4 w-4 text-gray-400" />
-                </div>
-                <p className="text-gray-600 mb-4">
-                  Manage your business listing and optimize for local AI search results.
-                </p>
-                <a
-                  href="https://business.google.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
-                >
-                  Open Tool
-                  <ExternalLink className="h-4 w-4 ml-1" />
-                </a>
-              </div>
-
-              {/* Google Search Console */}
-              <div className="bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-shadow">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <Zap className="h-5 w-5 text-blue-600" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-gray-900">Search Console</h3>
-                  </div>
-                  <ExternalLink className="h-4 w-4 text-gray-400" />
-                </div>
-                <p className="text-gray-600 mb-4">
-                  Monitor your site's performance in Google search results.
-                </p>
-                <a
-                  href="https://search.google.com/search-console/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
-                >
-                  Open Tool
-                  <ExternalLink className="h-4 w-4 ml-1" />
-                </a>
-              </div>
-
-              {/* Google Analytics */}
-              <div className="bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-shadow">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
-                      <Target className="h-5 w-5 text-orange-600" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-gray-900">Google Analytics</h3>
-                  </div>
-                  <ExternalLink className="h-4 w-4 text-gray-400" />
-                </div>
-                <p className="text-gray-600 mb-4">
-                  Track user behavior and measure your GEO optimization success.
-                </p>
-                <a
-                  href="https://analytics.google.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
-                >
-                  Open Tool
-                  <ExternalLink className="h-4 w-4 ml-1" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* AI Platform Tools */}
         <section className="py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -308,4 +221,5 @@ export default function ToolsPage() {
       </div>
     </>
   );
+}
 }
