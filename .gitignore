@@ -3,8 +3,17 @@ dist
 .DS_Store
 server/public
 vite.config.ts.*
-*.tar.gznode_modules/
+*.tar.gz
+
+# Environment variables
+.env
+.env.*
+!.env.example
 
 # Development SQLite database
 dev.db
 dev.db-*
+
+# Logs
+*.log
+logs/
