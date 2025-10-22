@@ -7,6 +7,7 @@ import type { Express, RequestHandler } from "express";
 import memoize from "memoizee";
 import connectPg from "connect-pg-simple";
 import { storage } from "./storage";
+import lusca from "lusca";
 
 // Check if we're in a development environment without Replit
 const isReplitEnvironment = process.env.REPLIT_DOMAINS && process.env.REPL_ID;
@@ -65,6 +66,16 @@ export function getSession() {
       sameSite: 'lax', // CSRF protection
     },
   });
+}
+
+/**
+ * Returns the CSRF protection middleware. Should be used after session middleware.
+ * Example usage in your Express app setup:
+ *   app.use(getSession());
+ *   app.use(getCsrfProtection());
+ */
+export function getCsrfProtection(): RequestHandler {
+  return lusca.csrf();
 }
 
 function updateUserSession(
