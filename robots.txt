@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://geoisthenewseo.com/sitemap.xml
+# Host: geoisthenewseo.com (optional)
