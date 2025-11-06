@@ -34,13 +34,20 @@ export function getSession() {
   
   if (!isReplitEnvironment) {
     // Use memory store for development
+    // Use secure cookies in development if HTTPS is used, or allow override via env
+    const cookieSecure = process.env.SESSION_COOKIE_SECURE
+      ? process.env.SESSION_COOKIE_SECURE === 'true'
+      : (process.env.NODE_ENV === "production" || process.env.HTTPS === "true");
+    if (!cookieSecure) {
+      console.warn("⚠️  Session cookies are not marked as secure (only sent over HTTPS). Consider enabling HTTPS and setting SESSION_COOKIE_SECURE=true for secure development.");
+    }
     return session({
       secret: process.env.SESSION_SECRET || 'dev-secret-change-me',
       resave: false,
       saveUninitialized: false,
       cookie: {
         httpOnly: true,
-        secure: false, // Allow http in development
+        secure: cookieSecure,
         maxAge: sessionTtl,
         sameSite: 'lax',
       },
