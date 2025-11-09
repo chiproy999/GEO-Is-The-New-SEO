@@ -5,13 +5,12 @@ This checklist helps ensure a smooth production deployment of the GEO Is The New
 ## Pre-Deployment Checklist
 
 ### Environment Configuration
-- [ ] Set up production PostgreSQL database
+- [ ] Set up production PostgreSQL database (Vercel Postgres or Neon recommended)
 - [ ] Configure `DATABASE_URL` environment variable with production database credentials
 - [ ] Generate and set a strong `SESSION_SECRET` (use a random string generator)
-- [ ] Set `SESSION_COOKIE_SECURE=true` if using HTTPS
+- [ ] Set `SESSION_COOKIE_SECURE=true` (Vercel provides HTTPS automatically)
 - [ ] Set `NODE_ENV=production`
 - [ ] Configure `VITE_GA_MEASUREMENT_ID` for Google Analytics (optional)
-- [ ] Set `REPLIT_DOMAINS` if deploying on Replit (optional)
 
 ### Database Setup
 - [ ] Run database migrations: `npm run db:push`
@@ -56,12 +55,16 @@ This checklist helps ensure a smooth production deployment of the GEO Is The New
 
 ## Deployment Steps
 
-### Option A: Replit Deployment
-1. Configure environment variables in Replit Secrets
-2. Click "Deploy" in Replit
-3. Monitor deployment logs
-4. Test the deployed application
-5. Configure custom domain (if applicable)
+### Option A: Vercel Deployment (Recommended)
+1. Install Vercel CLI: `npm i -g vercel`
+2. Login to Vercel: `vercel login`
+3. Configure environment variables in Vercel dashboard or via CLI
+4. Run `npm run build` to create production build
+5. Deploy with `vercel --prod`
+6. Alternatively, connect your GitHub repo to Vercel for automatic deployments
+7. Configure custom domain in Vercel dashboard (if applicable)
+8. Set up Vercel Postgres or connect to Neon database
+9. Run database migrations after deployment
 
 ### Option B: Standard Node.js Hosting
 1. Upload code to your hosting provider

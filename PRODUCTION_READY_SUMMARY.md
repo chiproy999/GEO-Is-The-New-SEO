@@ -51,7 +51,7 @@ The GEO Is The New SEO website has been thoroughly reviewed and prepared for pro
 - Security best practices documentation
 
 ### 5. Production Build ✅
-**Issue**: Replit dev banner in production HTML  
+**Issue**: Development banner in production HTML  
 **Fixed**: Removed development-only script tag
 
 ### 6. Dependencies ✅
@@ -81,9 +81,9 @@ Gzipped:  ~170 KB total compressed
 ### Stack
 - **Frontend**: React 18 + TypeScript + Tailwind CSS
 - **Backend**: Node.js + Express
-- **Database**: PostgreSQL (Neon serverless ready)
+- **Database**: PostgreSQL (Vercel Postgres or Neon serverless)
 - **Build**: Vite + esbuild
-- **Deployment**: Replit autoscale or standard Node.js hosting
+- **Deployment**: Vercel (recommended) or standard Node.js hosting
 
 ### Browser Support
 - Chrome (latest)
@@ -146,7 +146,7 @@ Gzipped:  ~170 KB total compressed
 
 ### Features
 - 📊 Interactive progress tracking checklist
-- 🔐 Authentication with Replit Auth
+- 🔐 Authentication system
 - 📧 Email subscription system
 - 🎨 Modern, responsive UI with Tailwind
 - 📱 Mobile-optimized design
@@ -157,14 +157,15 @@ Gzipped:  ~170 KB total compressed
 
 ## Deployment Options
 
-### Option A: Replit (Recommended for Quick Start)
-1. Set environment variables in Replit Secrets
-2. Click "Deploy" button
-3. Monitor deployment logs
-4. Configure custom domain (optional)
+### Option A: Vercel (Recommended)
+1. Install Vercel CLI: `npm i -g vercel`
+2. Login and configure environment variables
+3. Build the application: `npm run build`
+4. Deploy: `vercel --prod`
+5. Configure custom domain in Vercel dashboard
 
-**Pros**: Zero-config deployment, autoscaling, PostgreSQL included  
-**Cons**: Vendor lock-in
+**Pros**: Zero-config deployment, automatic HTTPS, serverless functions, excellent DX  
+**Cons**: Serverless limitations for long-running processes
 
 ### Option B: Self-Hosted Node.js
 1. Provision PostgreSQL database
@@ -270,7 +271,7 @@ These are known and documented, but don't block production launch:
 ### External Resources
 - [Google Search Console](https://search.google.com/search-console)
 - [Google Analytics](https://analytics.google.com)
-- [Replit Documentation](https://docs.replit.com)
+- [Vercel Documentation](https://vercel.com/docs)
 - [Neon Database](https://neon.tech/docs)
 
 ---
