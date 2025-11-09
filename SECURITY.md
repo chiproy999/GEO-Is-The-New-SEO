@@ -2,20 +2,34 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+We actively support the latest version of GEO Is The New SEO with security updates.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| 1.0.x   | :white_check_mark: |
+| < 1.0   | :x:                |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+If you discover a security vulnerability in this project, please report it by emailing the maintainers or creating a private security advisory on GitHub.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+When reporting a vulnerability, please include:
+- A description of the vulnerability
+- Steps to reproduce the issue
+- Potential impact
+- Suggested fix (if available)
+
+We will respond to security reports within 48 hours and will work to address confirmed vulnerabilities as quickly as possible.
+
+## Security Best Practices
+
+This application follows security best practices including:
+- CSRF protection on all state-changing endpoints
+- Secure session management
+- Input validation and sanitization
+- SQL injection prevention through parameterized queries
+- XSS prevention through React's built-in escaping
+- Regular dependency updates and security audits
+
