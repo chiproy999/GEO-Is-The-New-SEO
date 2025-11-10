@@ -76,10 +76,18 @@ export function getSession() {
 }
 
 /**
- * Returns the CSRF protection middleware. Should be used after session middleware.
+ * Returns an array containing both the session middleware and CSRF protection middleware.
  * Example usage in your Express app setup:
- *   app.use(getSession());
- *   app.use(getCsrfProtection());
+ *   app.use(...getSessionWithCsrf());
+ * This ensures CSRF protection is always applied after session middleware.
+ */
+export function getSessionWithCsrf(): RequestHandler[] {
+  return [getSession(), getCsrfProtection()];
+}
+
+/**
+ * Returns the CSRF protection middleware. Should be used after session middleware.
+ * If you need session and CSRF protection together, use getSessionWithCsrf().
  */
 export function getCsrfProtection(): RequestHandler {
   return lusca.csrf();
