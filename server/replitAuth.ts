@@ -7,6 +7,7 @@ import type { Express, RequestHandler } from "express";
 import memoize from "memoizee";
 import connectPg from "connect-pg-simple";
 import { storage } from "./storage";
+import lusca from "lusca";
 
 // Check if we're in a development environment without Replit
 const isReplitEnvironment = process.env.REPLIT_DOMAINS && process.env.REPL_ID;
@@ -33,6 +34,13 @@ export function getSession() {
   
   if (!isReplitEnvironment) {
     // Use memory store for development
+    // Use secure cookies in development if HTTPS is used, or allow override via env
+    const cookieSecure = process.env.SESSION_COOKIE_SECURE
+      ? process.env.SESSION_COOKIE_SECURE === 'true'
+      : (process.env.NODE_ENV === "production" || process.env.HTTPS === "true");
+    if (!cookieSecure) {
+      console.warn("⚠️  Session cookies are not marked as secure (only sent over HTTPS). Consider enabling HTTPS and setting SESSION_COOKIE_SECURE=true for secure development.");
+    }
     return session({
       secret: process.env.SESSION_SECRET || 'dev-secret-change-me',
       resave: false,
@@ -40,6 +48,7 @@ export function getSession() {
       cookie: {
         httpOnly: true,
         secure: process.env.SESSION_COOKIE_SECURE === "false" ? false : true, // Enforce SSL unless explicitly overridden
+        secure: cookieSecure,
         maxAge: sessionTtl,
         sameSite: 'lax',
       },
@@ -65,6 +74,24 @@ export function getSession() {
       sameSite: 'lax', // CSRF protection
     },
   });
+}
+
+/**
+ * Returns an array containing both the session middleware and CSRF protection middleware.
+ * Example usage in your Express app setup:
+ *   app.use(...getSessionWithCsrf());
+ * This ensures CSRF protection is always applied after session middleware.
+ */
+export function getSessionWithCsrf(): RequestHandler[] {
+  return [getSession(), getCsrfProtection()];
+}
+
+/**
+ * Returns the CSRF protection middleware. Should be used after session middleware.
+ * If you need session and CSRF protection together, use getSessionWithCsrf().
+ */
+export function getCsrfProtection(): RequestHandler {
+  return lusca.csrf();
 }
 
 function updateUserSession(
