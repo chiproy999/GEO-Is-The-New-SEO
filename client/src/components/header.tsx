@@ -18,20 +18,14 @@ export default function Header() {
     { label: "Pricing", path: "/pricing" },
   ];
 
-  const platformMenuItems = [
-    { label: "ChatGPT", path: "/platforms/chatgpt" },
-    { label: "Claude", path: "/platforms/claude" },
-    { label: "Gemini", path: "/platforms/gemini" },
-    { label: "Perplexity", path: "/platforms/perplexity" },
-  ];
-
   const isActivePath = (path: string) => {
     return location === path;
   };
+  const displayName = user?.firstName || user?.email || "User";
 
   return (
     <header className="bg-white/95 backdrop-blur-lg shadow-md border-b border-gray-200/50 sticky top-0 z-50 glass">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="section-shell">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
@@ -61,9 +55,7 @@ export default function Header() {
                 <div className="flex items-center space-x-3 ml-6 pl-6 border-l border-gray-200">
                   <div className="flex items-center space-x-2">
                     <User className="h-4 w-4 text-gray-500" />
-                    <span className="text-sm text-gray-600">
-                      {(user as any)?.firstName || (user as any)?.email || 'User'}
-                    </span>
+                    <span className="text-sm text-gray-600">{displayName}</span>
                   </div>
                   <Button
                     variant="ghost"

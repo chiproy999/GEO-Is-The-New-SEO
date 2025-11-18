@@ -31,6 +31,17 @@ npm install
 npm run dev
 ```
 
+## ⚙️ Configuration
+
+Set the following environment variables (e.g., in `client/.env`) to control CTA destinations and Stripe checkout links:
+
+- `VITE_SIGNUP_URL` – optional custom URL for the free tier signup button (defaults to `/api/login`).
+- `VITE_CHECKOUT_PRO_MONTHLY_URL` / `VITE_CHECKOUT_PRO_ANNUAL_URL`
+- `VITE_CHECKOUT_BUSINESS_MONTHLY_URL` / `VITE_CHECKOUT_BUSINESS_ANNUAL_URL`
+- `VITE_CHECKOUT_ENTERPRISE_URL` – Calendly, HubSpot, or a hosted payment link for enterprise deals.
+
+You can use Stripe Payment Links or Checkout Sessions for the URLs above while the full billing flow is being finalized.
+
 ## 📄 License
 
 MIT License - see LICENSE file for details.

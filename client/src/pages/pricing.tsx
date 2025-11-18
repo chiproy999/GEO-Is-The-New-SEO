@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,7 +9,10 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import SEOHead from "@/components/seo-head";
 
+type BillingCycle = "monthly" | "annual";
+
 interface PricingTier {
+  id: "free" | "pro" | "business" | "enterprise";
   name: string;
   price: number;
   priceAnnual: number;
@@ -26,6 +28,7 @@ interface PricingTier {
 
 const pricingTiers: PricingTier[] = [
   {
+    id: "free",
     name: "FREE",
     price: 0,
     priceAnnual: 0,
@@ -42,6 +45,7 @@ const pricingTiers: PricingTier[] = [
     testId: "pricing-free"
   },
   {
+    id: "pro",
     name: "PRO",
     price: 29,
     priceAnnual: 290,
@@ -63,6 +67,7 @@ const pricingTiers: PricingTier[] = [
     testId: "pricing-pro"
   },
   {
+    id: "business",
     name: "BUSINESS",
     price: 99,
     priceAnnual: 990,
@@ -84,6 +89,7 @@ const pricingTiers: PricingTier[] = [
     testId: "pricing-business"
   },
   {
+    id: "enterprise",
     name: "ENTERPRISE",
     price: 499,
     priceAnnual: 4990,
@@ -161,7 +167,45 @@ const faqs = [
 ];
 
 export default function PricingPage() {
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
+
+  const signupUrl = import.meta.env.VITE_SIGNUP_URL || "/api/login";
+  const checkoutLinks: Record<PricingTier["id"], Partial<Record<BillingCycle, string | undefined>>> = {
+    free: {},
+    pro: {
+      monthly: import.meta.env.VITE_CHECKOUT_PRO_MONTHLY_URL,
+      annual: import.meta.env.VITE_CHECKOUT_PRO_ANNUAL_URL,
+    },
+    business: {
+      monthly: import.meta.env.VITE_CHECKOUT_BUSINESS_MONTHLY_URL,
+      annual: import.meta.env.VITE_CHECKOUT_BUSINESS_ANNUAL_URL,
+    },
+    enterprise: {
+      monthly: import.meta.env.VITE_CHECKOUT_ENTERPRISE_URL,
+      annual: import.meta.env.VITE_CHECKOUT_ENTERPRISE_URL,
+    },
+  };
+
+  const handlePlanClick = (tier: PricingTier) => {
+    if (tier.id === "free") {
+      window.location.href = signupUrl;
+      return;
+    }
+
+    if (tier.id === "enterprise") {
+      const enterpriseUrl = checkoutLinks.enterprise.monthly || "/contact?plan=enterprise";
+      window.location.href = enterpriseUrl;
+      return;
+    }
+
+    const destination = checkoutLinks[tier.id]?.[billingCycle];
+
+    if (destination) {
+      window.location.href = destination;
+    } else {
+      window.location.href = `/contact?plan=${tier.id}&billing=${billingCycle}`;
+    }
+  };
 
   return (
     <>
@@ -201,7 +245,7 @@ export default function PricingPage() {
             </div>
             
             {/* Billing Toggle */}
-            <Tabs value={billingCycle} onValueChange={(value) => setBillingCycle(value as "monthly" | "annual")} className="w-fit mx-auto">
+              <Tabs value={billingCycle} onValueChange={(value) => setBillingCycle(value as BillingCycle)} className="w-fit mx-auto">
               <TabsList className="grid w-full grid-cols-2 bg-gray-100">
                 <TabsTrigger value="monthly" data-testid="billing-monthly">Monthly</TabsTrigger>
                 <TabsTrigger value="annual" className="relative" data-testid="billing-annual">
@@ -217,7 +261,14 @@ export default function PricingPage() {
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {pricingTiers.map((tier) => (
+              {pricingTiers.map((tier) => {
+                const isCheckoutReady =
+                  tier.id === "free" ||
+                  tier.id === "enterprise"
+                    ? !!checkoutLinks[tier.id]?.monthly
+                    : !!checkoutLinks[tier.id]?.[billingCycle];
+
+                return (
                 <Card 
                   key={tier.name} 
                   className={`relative ${tier.isMostPopular ? 'border-blue-500 border-2 shadow-xl scale-105' : ''}`}
@@ -266,19 +317,25 @@ export default function PricingPage() {
                     </ul>
                   </CardContent>
                   
-                  <CardFooter>
+                  <CardFooter className="flex flex-col gap-2">
                     <Button 
                       className="w-full" 
                       variant={tier.buttonVariant}
                       size="lg"
                       data-testid={`${tier.testId}-button`}
+                      onClick={() => handlePlanClick(tier)}
                     >
                       {tier.buttonText}
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
+                    {tier.id !== "free" && tier.id !== "enterprise" && !isCheckoutReady && (
+                      <p className="text-xs text-amber-600 text-center">
+                        Checkout link coming soon—contact form will open instead.
+                      </p>
+                    )}
                   </CardFooter>
                 </Card>
-              ))}
+              )})}
             </div>
           </div>
         </section>
