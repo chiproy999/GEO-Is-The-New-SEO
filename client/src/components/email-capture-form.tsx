@@ -126,6 +126,7 @@ export default function EmailCaptureForm({
           className="flex-1"
           data-testid="input-email"
           disabled={subscribeMutation.isPending}
+          aria-label="Email address"
         />
         <Button 
           type="submit" 

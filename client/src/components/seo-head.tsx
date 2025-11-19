@@ -10,6 +10,7 @@ interface SEOProps {
   author?: string;
   publishDate?: string;
   modifiedDate?: string;
+  twitterHandle?: string;
 }
 
 export default function SEOHead({
@@ -21,7 +22,8 @@ export default function SEOHead({
   type = 'website',
   author = 'GEO Optimization Guide',
   publishDate = '2025-01-01',
-  modifiedDate = new Date().toISOString().split('T')[0]
+  modifiedDate = new Date().toISOString().split('T')[0],
+  twitterHandle = '@GEOOptimization'
 }: SEOProps) {
   
   useEffect(() => {
@@ -84,8 +86,8 @@ export default function SEOHead({
     updateMetaTag('twitter:title', title);
     updateMetaTag('twitter:description', description.length > 200 ? description.substring(0, 197) + '...' : description);
     updateMetaTag('twitter:image', ogImage);
-    updateMetaTag('twitter:site', '@GEOOptimization');
-    updateMetaTag('twitter:creator', '@GEOOptimization');
+    updateMetaTag('twitter:site', twitterHandle);
+    updateMetaTag('twitter:creator', twitterHandle);
     
     // Article specific tags (if type is article)
     if (type === 'article') {

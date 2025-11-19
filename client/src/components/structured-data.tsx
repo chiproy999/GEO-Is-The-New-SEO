@@ -251,7 +251,11 @@ export default function StructuredData({
       "name": "Latest GEO and AI Search Optimization Strategies for 2025",
       "text": "Stay ahead of the curve with the most up-to-date Generative Engine Optimization strategies. Our guide covers the latest techniques for ChatGPT, Claude, Gemini, and Perplexity AI platforms.",
       "datePosted": new Date().toISOString().split('T')[0],
-      "expires": "2025-12-31",
+      "expires": (() => {
+        const now = new Date();
+        now.setFullYear(now.getFullYear() + 1);
+        return now.toISOString().split('T')[0];
+      })(),
       "category": "SEO Updates",
       "announcementLocation": {
         "@type": "VirtualLocation",
