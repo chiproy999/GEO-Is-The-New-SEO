@@ -9,6 +9,9 @@ import connectPg from "connect-pg-simple";
 import { storage } from "./storage";
 import lusca from "lusca";
 
+// CSRF middleware for use after session
+export const csrfMiddleware = lusca.csrf();
+
 // Check if we're in a development environment without Replit
 const isReplitEnvironment = process.env.REPLIT_DOMAINS && process.env.REPL_ID;
 

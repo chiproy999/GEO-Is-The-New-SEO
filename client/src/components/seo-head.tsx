@@ -23,7 +23,10 @@ export default function SEOHead({
   publishDate = "2025-01-01",
   modifiedDate = new Date().toISOString().split("T")[0],
 }: SEOProps) {
-  const origin = typeof window !== "undefined" ? window.location.origin : "";
+  const origin =
+    typeof window !== "undefined"
+      ? window.location.origin
+      : import.meta.env.VITE_APP_URL || "";
   const pathname = typeof window !== "undefined" ? window.location.pathname : "";
   const currentUrl = url ?? `${origin}${pathname}`;
   const defaultImage = image ?? `${origin}/favicon.ico`;
