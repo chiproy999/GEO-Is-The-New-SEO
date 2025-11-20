@@ -137,6 +137,21 @@ html {
 }
 
 @layer components {
+  /*
+   * Utility Classes Documentation
+   *
+   * .section-shell
+   *   - Use for main content containers to provide consistent max-width and horizontal padding.
+   *   - Apply to top-level sections/pages for layout alignment.
+   *
+   * .headline-xl
+   *   - Use for prominent headings or hero titles.
+   *   - Provides large, bold typography with Poppins font.
+   *
+   * .stat-card
+   *   - Use for displaying key statistics or metrics in a card format.
+   *   - Combine with .card-surface for visual styling.
+   */
   .section-shell {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
