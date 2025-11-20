@@ -5,6 +5,7 @@ This checklist helps ensure a smooth production deployment of the GEO Is The New
 ## Pre-Deployment Checklist
 
 ### Environment Configuration
+- [ ] Confirm repository access (private repo requires GitHub/Vercel token with appropriate permissions)
 - [ ] Set up production PostgreSQL database (Vercel Postgres or Neon recommended)
 - [ ] Configure `DATABASE_URL` environment variable with production database credentials
 - [ ] Generate and set a strong `SESSION_SECRET` (use a random string generator)
@@ -113,6 +114,9 @@ This checklist helps ensure a smooth production deployment of the GEO Is The New
 ### Acceptable for Production
 - **Bundle Size Warning**: Main JavaScript bundle is 548KB. This is acceptable for an MVP. Consider code splitting in future iterations if performance becomes an issue.
 - **Dev Dependencies**: 5 moderate npm vulnerabilities in dev dependencies (esbuild-related). These only affect the development server, not production builds.
+
+### Current Blockers (Nov 20, 2025)
+- **Dependency installation is blocked**: `npm install` currently returns 403 responses from the npm registry (e.g., `@eslint/js`), so `npm run build` cannot produce the required `dist/public` output for Vercel. Resolve by restoring registry access (e.g., through the proxy configuration) and rerun `npm install` followed by `npm run build` to confirm artifacts are generated.
 
 ### Future Enhancements
 - Implement code splitting to reduce initial bundle size
