@@ -17,3 +17,6 @@ dev.db-*
 # Logs
 *.log
 logs/
+
+# NPM cache
+tmp/.npm-cache/

@@ -1,16 +1,14 @@
-import Header from "@/components/header";
 import HeroSection from "@/components/hero-section";
 import OverviewStats from "@/components/overview-stats";
 import ResourcesSection from "@/components/resources-section";
-import Footer from "@/components/footer";
-import StructuredData from "@/components/structured-data";
-import SEOHead from "@/components/seo-head";
-import PageBreadcrumbs from "@/components/page-breadcrumbs";
 import ValidationBadges from "@/components/validation-badges";
 import AuthoritySection from "@/components/authority-section";
+import MarketingLayout from "@/components/layouts/marketing-layout";
+import { seoMetadata } from "@/lib/seo";
 import { Link } from "wouter";
 import { Bot, Brain, Gem, Search, MapPin, CheckSquare, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import EmailCaptureForm from "@/components/email-capture-form";
 
 export default function Home() {
   const mainSections = [
@@ -75,21 +73,15 @@ export default function Home() {
   ];
 
   return (
-    <div className="font-inter bg-gray-50 text-gray-900 min-h-screen">
-      <SEOHead 
-        title="GEO Optimization Guide 2025 - Master AI Search Rankings | Future-Proof Your Business"
-        description="Master Generative Engine Optimization (GEO) and Google Maps ranking with our comprehensive guide. Future-proof your business for ChatGPT, Claude, Gemini, and Perplexity AI with actionable strategies and interactive checklists."
-        keywords={["GEO", "Generative Engine Optimization", "AI Search Optimization", "ChatGPT SEO", "Claude AI", "Gemini AI", "Google Maps SEO", "Schema Markup", "JSON-LD", "AI Search Results", "Perplexity AI", "Local SEO"]}
-        type="website"
-      />
-      <StructuredData />
-      <Header />
-      <PageBreadcrumbs />
-      <HeroSection />
+    <MarketingLayout
+      hero={<HeroSection />}
+      seo={seoMetadata.home}
+      structuredData={{ pageType: "home" }}
+      mainClassName="space-y-16"
+    >
       <OverviewStats />
       <ValidationBadges />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
         {/* Pain Point Section */}
         <section className="mb-16 bg-red-50 rounded-2xl p-8 border border-red-200">
           <div className="text-center">
@@ -119,11 +111,12 @@ export default function Home() {
 
         {/* Main Sections */}
         <section className="mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-12 space-y-3">
+            <span className="section-eyebrow">Guides</span>
+            <h2 className="headline-xl">
               Complete Optimization Guides
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="body-lg max-w-3xl mx-auto">
               Stop losing customers to AI search. Master the strategies that actually work.
             </p>
           </div>
@@ -132,8 +125,8 @@ export default function Home() {
             {mainSections.map((section, index) => {
               const IconComponent = section.icon;
               return (
-                <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                  <div className={`bg-gradient-to-r ${section.color} p-6 text-white`}>
+                <article key={section.title} className="card-surface h-full flex flex-col overflow-hidden">
+                  <div className={`bg-gradient-to-r ${section.color} p-6 text-white rounded-2xl`}>
                     <div className="flex items-center mb-4">
                       <IconComponent className="h-8 w-8 mr-3" />
                       <h3 className="text-xl font-bold">{section.title}</h3>
@@ -141,10 +134,10 @@ export default function Home() {
                     <p className="text-white/90">{section.description}</p>
                   </div>
                   
-                  <div className="p-6">
+                  <div className="p-6 flex-1 flex flex-col">
                     <ul className="space-y-2 mb-6">
                       {section.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center text-sm text-gray-600">
+                        <li key={feature} className="flex items-center text-sm text-gray-600">
                           <div className="w-2 h-2 bg-brand-blue rounded-full mr-3"></div>
                           {feature}
                         </li>
@@ -152,13 +145,16 @@ export default function Home() {
                     </ul>
                     
                     <Link href={section.link}>
-                      <Button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-50" data-testid={`link-${section.link.replace('/', '')}`}>
+                      <Button
+                        className="w-full border border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
+                        data-testid={`link-${section.link.replace("/", "")}`}
+                      >
                         Explore Guide
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </Link>
                   </div>
-                </div>
+                </article>
               );
             })}
           </div>
@@ -166,11 +162,12 @@ export default function Home() {
 
         {/* Platform-Specific Optimization */}
         <section className="mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-12 space-y-3">
+            <span className="section-eyebrow">Platforms</span>
+            <h2 className="headline-xl">
               Why Can't AI Platforms Find You?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="body-lg max-w-3xl mx-auto">
               Each AI platform ignores different signals. Learn exactly what you're missing.
             </p>
           </div>
@@ -180,17 +177,20 @@ export default function Home() {
               const IconComponent = platform.icon;
               return (
                 <Link key={index} href={platform.link}>
-                  <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-300 cursor-pointer" data-testid={`platform-${platform.link.split('/').pop()}`}>
-                    <div className="flex items-center mb-4">
+                  <article
+                    className="card-surface h-full cursor-pointer transition-all hover:-translate-y-1"
+                    data-testid={`platform-${platform.link.split("/").pop()}`}
+                  >
+                    <div className="flex items-center gap-3 mb-4">
                       <IconComponent className={`h-8 w-8 ${platform.color} mr-3`} />
                       <h3 className="text-lg font-semibold text-gray-900">{platform.title}</h3>
                     </div>
                     <p className="text-sm text-gray-600 mb-4">{platform.description}</p>
-                    <div className="flex items-center text-sm font-medium text-brand-blue">
+                    <div className="flex items-center text-sm font-semibold text-brand-blue">
                       Learn More
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </div>
-                  </div>
+                  </article>
                 </Link>
               );
             })}
@@ -199,9 +199,32 @@ export default function Home() {
 
         <AuthoritySection />
         <ResourcesSection />
-      </div>
-      
-      <Footer />
-    </div>
+
+        <section className="mb-16">
+          <div className="surface-gradient rounded-3xl p-10 text-white shadow-2xl">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
+              <div className="flex-1 space-y-4">
+                <span className="section-eyebrow text-white/80">Action Plan</span>
+                <h2 className="headline-xl text-white">
+                  Become the business AI assistants recommend first
+                </h2>
+                <p className="body-lg text-white/80">
+                  Get our GEO field notes every week plus instant access to the starter guide.
+                  No fluff—just the experiments and frameworks we ship for clients.
+                </p>
+              </div>
+              <div className="flex-1">
+                <EmailCaptureForm
+                  source="home-cta"
+                  variant="inline"
+                  title="Stay ahead of AI search"
+                  description="Join 3,000+ marketers leveling up their GEO playbooks."
+                  buttonText="Send me the playbook"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+    </MarketingLayout>
   );
 }

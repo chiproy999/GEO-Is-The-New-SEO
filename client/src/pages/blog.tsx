@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import SEOHead from "@/components/seo-head";
 import { BookOpen, TrendingUp, Users, Target } from 'lucide-react';
+import EmailCaptureForm from "@/components/email-capture-form";
 
 export default function BlogPage() {
   return (
@@ -81,9 +81,14 @@ export default function BlogPage() {
                 <p className="text-gray-600 mb-4">
                   Want to be the first to know when we publish new content?
                 </p>
-                <button className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors">
-                  Subscribe for Updates
-                </button>
+                <EmailCaptureForm
+                  source="blog"
+                  variant="inline"
+                  title="Weekly GEO Dispatch"
+                  description="Fresh tactics, case studies, and AI platform updates."
+                  buttonText="Notify me"
+                />
+                <p className="text-xs text-gray-500 mt-3">No spam. Unsubscribe anytime.</p>
               </div>
             </div>
           </div>

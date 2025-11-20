@@ -6,7 +6,7 @@ export default function Landing() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-emerald-50">
       {/* Header */}
       <header className="border-b border-gray-200 bg-white/80 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="section-shell">
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center">
               <div className="bg-brand-blue rounded-lg p-2">
@@ -27,7 +27,7 @@ export default function Landing() {
       </header>
 
       {/* Hero Section */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <main className="section-shell section-padding">
         <div className="text-center">
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6 max-w-2xl mx-auto">
             <p className="font-semibold">⚠️ 90% of businesses are invisible to AI search platforms</p>

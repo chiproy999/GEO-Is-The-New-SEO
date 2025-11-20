@@ -36,72 +36,77 @@ export default function ResourcesSection() {
   ];
 
   return (
-    <section className="bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-lg p-8">
-      <h2 className="text-3xl font-bold mb-6">Additional Resources & Tools</h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        {/* Free Resources */}
-        <div>
-          <h3 className="text-xl font-semibold mb-4 flex items-center">
-            <Download className="h-6 w-6 text-brand-blue mr-3" />
-            Free Downloads
-          </h3>
-          <div className="space-y-3">
-            {freeResources.map((resource, index) => (
-              <div 
-                key={index} 
-                className="p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer"
-              >
-                <div className="font-semibold">{resource.title}</div>
-                <div className="text-sm text-gray-300">{resource.description}</div>
-              </div>
-            ))}
+    <section className="section-padding">
+      <div className="section-shell">
+        <div className="surface-gradient text-white">
+          <div className="flex flex-col gap-4 text-center">
+            <span className="section-eyebrow">Resources</span>
+            <h2 className="text-3xl font-semibold">Additional Resources & Tools</h2>
+            <p className="text-white/80">
+              Download the same blueprints we use internally to optimize GEO and Google Maps programs.
+            </p>
           </div>
-        </div>
 
-        {/* Tools & Links */}
-        <div>
-          <h3 className="text-xl font-semibold mb-4 flex items-center">
-            <Wrench className="h-6 w-6 text-brand-emerald mr-3" />
-            Essential Tools
-          </h3>
-          <div className="space-y-3">
-            {essentialTools.map((tool, index) => (
-              <a 
-                key={index}
-                href={tool.url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors"
-              >
-                <div className="flex items-start justify-between">
-                  <div>
-                    <div className="font-semibold">{tool.title}</div>
-                    <div className="text-sm text-gray-300">{tool.description}</div>
+          <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <div className="card-surface-muted bg-white/10 border-white/20 text-white">
+              <h3 className="mb-4 flex items-center text-xl font-semibold">
+                <Download className="mr-3 h-6 w-6 text-brand-blue" />
+                Free Downloads
+              </h3>
+              <div className="space-y-3">
+                {freeResources.map((resource) => (
+                  <div
+                    key={resource.title}
+                    className="rounded-2xl border border-white/10 bg-white/5 p-4 transition-all hover:-translate-y-0.5 hover:bg-white/10"
+                  >
+                    <div className="font-semibold">{resource.title}</div>
+                    <div className="text-sm text-white/70">{resource.description}</div>
                   </div>
-                  <ExternalLink className="h-4 w-4 text-gray-400 ml-2 flex-shrink-0" />
-                </div>
-              </a>
-            ))}
+                ))}
+              </div>
+            </div>
+
+            <div className="card-surface bg-white/5 border-white/20 text-white">
+              <h3 className="mb-4 flex items-center text-xl font-semibold">
+                <Wrench className="mr-3 h-6 w-6 text-brand-emerald" />
+                Essential Tools
+              </h3>
+              <div className="space-y-3">
+                {essentialTools.map((tool) => (
+                  <a
+                    key={tool.title}
+                    href={tool.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start justify-between rounded-2xl border border-white/10 bg-white/0 p-4 text-left transition-all hover:bg-white/10"
+                  >
+                    <div>
+                      <div className="font-semibold">{tool.title}</div>
+                      <div className="text-sm text-white/70">{tool.description}</div>
+                    </div>
+                    <ExternalLink className="ml-4 h-4 w-4 text-white/60" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-10 flex flex-col items-center gap-4 text-center">
+            <p className="text-lg font-medium text-white">Ready to dominate AI search results?</p>
+            <Button
+              size="lg"
+              className="bg-white text-brand-blue hover:bg-white/90"
+              onClick={() => {
+                const element = document.getElementById("checklist");
+                if (element) {
+                  element.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+              }}
+            >
+              Start Your Optimization Journey
+            </Button>
           </div>
         </div>
-      </div>
-
-      {/* CTA */}
-      <div className="mt-8 text-center">
-        <p className="text-lg mb-4">Ready to dominate AI search results?</p>
-        <Button 
-          className="bg-brand-blue text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-          onClick={() => {
-            const element = document.getElementById('checklist');
-            if (element) {
-              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-          }}
-        >
-          Start Your Optimization Journey
-        </Button>
       </div>
     </section>
   );
