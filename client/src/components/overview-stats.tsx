@@ -1,24 +1,42 @@
+const stats = [
+  {
+    value: "79%",
+    label: "AI-first searchers",
+    detail: "of consumers will use AI search in 2025",
+    accent: "text-brand-blue",
+  },
+  {
+    value: "180M+",
+    label: "ChatGPT users",
+    detail: "Monthly active across GPT experiences",
+    accent: "text-brand-emerald",
+  },
+  {
+    value: "858%",
+    label: "Perplexity growth",
+    detail: "Year-over-year query volume increase",
+    accent: "text-brand-amber",
+  },
+  {
+    value: "14.5%",
+    label: "AI traffic share",
+    detail: "Projected contribution to organic visits",
+    accent: "text-purple-600",
+  },
+];
+
 export default function OverviewStats() {
   return (
-    <section id="overview" className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="text-center">
-            <div className="text-4xl font-bold text-brand-blue mb-2">79%</div>
-            <div className="text-gray-600">of consumers will use AI search in 2025</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-brand-emerald mb-2">180M+</div>
-            <div className="text-gray-600">monthly ChatGPT users</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-brand-amber mb-2">858%</div>
-            <div className="text-gray-600">growth in Perplexity AI searches</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-purple-600 mb-2">14.5%</div>
-            <div className="text-gray-600">projected AI traffic share</div>
-          </div>
+    <section id="overview" className="section-padding bg-gradient-to-b from-white to-gray-50">
+      <div className="section-shell">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat) => (
+            <article key={stat.label} className="stat-card" aria-label={stat.label}>
+              <p className="stat-label">{stat.label}</p>
+              <p className={`stat-value ${stat.accent}`}>{stat.value}</p>
+              <p className="text-sm text-gray-500">{stat.detail}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
