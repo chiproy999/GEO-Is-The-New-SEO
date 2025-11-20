@@ -26,16 +26,18 @@ app.use((req, res, next) => {
 
   app.use((err: unknown, req: Request, res: Response, _next: NextFunction) => {
     const status =
-      typeof err === "object" && err !== null && "status" in err
-        ? Number((err as { status?: number }).status) || 500
-        : typeof err === "object" && err !== null && "statusCode" in err
-          ? Number((err as { statusCode?: number }).statusCode) || 500
-          : 500;
+      typeof err === "object" && err !== null
+        ? Number(
+            ((err as { status?: number; statusCode?: number }).status ??
+              (err as { statusCode?: number }).statusCode)
+          ) || 500
+        : 500;
     const message = err instanceof Error ? err.message : "Internal Server Error";
 
     res.status(status).json({ message });
 
     // Log a sanitized error message without rethrowing to keep the server stable
+    console.error(err);
     log(`Error ${status} on ${req.method} ${req.path}: ${message}`, "express");
   });
 
