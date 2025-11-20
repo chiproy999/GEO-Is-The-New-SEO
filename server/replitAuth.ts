@@ -34,13 +34,20 @@ export function getSession() {
   
   if (!isReplitEnvironment) {
     // Use memory store for development
+    // Use secure cookies in development if HTTPS is used, or allow override via env
+    const cookieSecure = process.env.SESSION_COOKIE_SECURE
+      ? process.env.SESSION_COOKIE_SECURE === 'true'
+      : (process.env.NODE_ENV === "production" || process.env.HTTPS === "true");
+    if (!cookieSecure) {
+      console.warn("⚠️  Session cookies are not marked as secure (only sent over HTTPS). Consider enabling HTTPS and setting SESSION_COOKIE_SECURE=true for secure development.");
+    }
     return session({
       secret: process.env.SESSION_SECRET || 'dev-secret-change-me',
       resave: false,
       saveUninitialized: false,
       cookie: {
         httpOnly: true,
-        secure: false, // Allow http in development
+        secure: cookieSecure,
         maxAge: sessionTtl,
         sameSite: 'lax',
       },
@@ -69,10 +76,18 @@ export function getSession() {
 }
 
 /**
- * Returns the CSRF protection middleware. Should be used after session middleware.
+ * Returns an array containing both the session middleware and CSRF protection middleware.
  * Example usage in your Express app setup:
- *   app.use(getSession());
- *   app.use(getCsrfProtection());
+ *   app.use(...getSessionWithCsrf());
+ * This ensures CSRF protection is always applied after session middleware.
+ */
+export function getSessionWithCsrf(): RequestHandler[] {
+  return [getSession(), getCsrfProtection()];
+}
+
+/**
+ * Returns the CSRF protection middleware. Should be used after session middleware.
+ * If you need session and CSRF protection together, use getSessionWithCsrf().
  */
 export function getCsrfProtection(): RequestHandler {
   return lusca.csrf();
