@@ -1,9 +1,33 @@
-import type { Express } from "express";
+import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertChecklistProgressSchema, insertEmailSubscriberSchema } from "@shared/schema";
+import {
+  insertChecklistProgressSchema,
+  insertEmailSubscriberSchema,
+  type InsertChecklistProgress,
+  type InsertEmailSubscriber,
+} from "@shared/schema";
 import { setupAuth, isAuthenticated, csrfProtection } from "./replitAuth";
-import { z } from "zod";
+import type { ParsedQs } from "qs";
+
+type AuthenticatedRequest<TBody = unknown, TQuery extends ParsedQs = ParsedQs> = Request<
+  Record<string, string>,
+  unknown,
+  TBody,
+  TQuery
+> & {
+  user: { claims: { sub: string } };
+};
+
+const getClientIp = (req: Request): string | undefined => {
+  const forwardedHeader = req.headers["x-forwarded-for"];
+  const rawForwarded = Array.isArray(forwardedHeader)
+    ? forwardedHeader[0]
+    : forwardedHeader;
+
+  const forwardedIp = rawForwarded?.split(",")[0]?.trim();
+  return forwardedIp || req.socket.remoteAddress || undefined;
+};
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Auth middleware
@@ -13,65 +37,72 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.use(csrfProtection);
 
   // Auth routes
-  app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
+  app.get("/api/auth/user", isAuthenticated, async (req: AuthenticatedRequest, res: Response) => {
     try {
       const userId = req.user.claims.sub;
       const user = await storage.getUser(userId);
       res.json(user);
     } catch (error) {
-      console.error("Error fetching user:", error);
-      res.status(500).json({ message: "Failed to fetch user" });
+      const message = error instanceof Error ? error.message : "Failed to fetch user";
+      res.status(500).json({ message });
     }
   });
   
   // Get checklist progress
-  app.get("/api/checklist/progress", isAuthenticated, async (req: any, res) => {
+  app.get("/api/checklist/progress", isAuthenticated, async (req: AuthenticatedRequest<unknown, ParsedQs>, res: Response) => {
     try {
       const userId = req.user.claims.sub;
-      const { category } = req.query as { category?: string };
+      const categoryQuery = req.query.category;
+      const category = typeof categoryQuery === "string" ? categoryQuery : undefined;
       const progress = await storage.getChecklistProgress(userId, category);
       res.json(progress);
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unable to load progress";
+      res.status(500).json({ message });
     }
   });
 
   // Update checklist item
-  app.post("/api/checklist/progress", isAuthenticated, async (req: any, res) => {
-    try {
-      const userId = req.user.claims.sub;
-      // Validate request body excluding userId since it comes from auth session
-      const validatedData = insertChecklistProgressSchema.omit({ userId: true }).parse(req.body);
-      
-      const progress = await storage.updateChecklistItem({
-        ...validatedData,
-        userId
-      });
-      res.json(progress);
-    } catch (error: any) {
-      console.error('Checklist progress update error:', error);
-      res.status(400).json({ message: error.message });
-    }
-  });
+  app.post(
+    "/api/checklist/progress",
+    isAuthenticated,
+    async (req: AuthenticatedRequest<InsertChecklistProgress>, res: Response) => {
+      try {
+        const userId = req.user.claims.sub;
+        // Validate request body excluding userId since it comes from auth session
+        const validatedData = insertChecklistProgressSchema.omit({ userId: true }).parse(req.body);
+
+        const progress = await storage.updateChecklistItem({
+          ...validatedData,
+          userId,
+        });
+        res.json(progress);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : "Invalid checklist update";
+        res.status(400).json({ message });
+      }
+    },
+  );
 
   // Get user progress summary
-  app.get("/api/checklist/summary", isAuthenticated, async (req: any, res) => {
+  app.get("/api/checklist/summary", isAuthenticated, async (req: AuthenticatedRequest, res: Response) => {
     try {
       const userId = req.user.claims.sub;
       const summary = await storage.getUserProgress(userId);
       res.json(summary);
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unable to load summary";
+      res.status(500).json({ message });
     }
   });
 
   // Email subscription endpoint
-  app.post("/api/subscribe", async (req, res) => {
+  app.post("/api/subscribe", async (req: Request<unknown, unknown, InsertEmailSubscriber>, res: Response) => {
     try {
       // Get IP and user agent for tracking
-      const ipAddress = req.headers['x-forwarded-for'] as string || req.socket.remoteAddress;
-      const userAgent = req.headers['user-agent'] || '';
-      const referrer = req.headers.referer || '';
+      const ipAddress = getClientIp(req);
+      const userAgent = typeof req.headers["user-agent"] === "string" ? req.headers["user-agent"] : "";
+      const referrer = typeof req.headers.referer === "string" ? req.headers.referer : "";
 
       // Validate request body
       const validatedData = insertEmailSubscriberSchema.parse(req.body);
@@ -108,9 +139,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           downloadUrl: '/api/download/geo-checklist'
         }
       });
-    } catch (error: any) {
-      console.error('Subscription error:', error);
-      if (error.message === 'Email already subscribed') {
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Failed to subscribe";
+      if (message === "Email already subscribed") {
         res.json({
           success: true,
           message: "You're already subscribed!",
@@ -120,22 +151,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
             downloadUrl: '/api/download/geo-checklist'
           }
         });
-      } else {
-        res.status(400).json({ message: error.message || "Failed to subscribe" });
+        return;
       }
+
+      res.status(400).json({ message });
     }
   });
 
   // Check subscription status
-  app.get("/api/subscribe/check", async (req, res) => {
+  app.get("/api/subscribe/check", async (req: Request<unknown, unknown, unknown, ParsedQs>, res: Response) => {
     try {
-      const { email } = req.query as { email?: string };
-      if (!email) {
+      const emailQuery = req.query.email;
+      if (typeof emailQuery !== "string") {
         return res.json({ subscribed: false });
       }
-      
-      const subscriber = await storage.getSubscriberByEmail(email);
-      res.json({ 
+
+      const subscriber = await storage.getSubscriberByEmail(emailQuery);
+      res.json({
         subscribed: !!subscriber && !subscriber.unsubscribed,
         leadMagnet: subscriber ? {
           type: 'guide',
@@ -143,7 +175,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           downloadUrl: '/api/download/geo-checklist'
         } : null
       });
-    } catch (error: any) {
+    } catch (_error: unknown) {
       res.json({ subscribed: false });
     }
   });
