@@ -13,7 +13,10 @@ export default function StructuredData({
   title = "Complete GEO & AI Search Optimization Guide",
   description = "Master Generative Engine Optimization (GEO) and Google Maps ranking with our comprehensive guide. Future-proof your business for ChatGPT, Claude, Gemini, and all AI platforms with actionable strategies and interactive checklists.",
 }: StructuredDataProps) {
-  const origin = typeof window !== "undefined" ? window.location.origin : "https://geo-guide.example.com";
+  const origin =
+    typeof window !== "undefined"
+      ? window.location.origin
+      : import.meta.env.VITE_PUBLIC_URL || "";
   const baseSchemas: JsonLdSchema[] = [
     {
       "@context": "https://schema.org",
