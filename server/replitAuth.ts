@@ -50,6 +50,7 @@ export function getSession() {
       saveUninitialized: false,
       cookie: {
         httpOnly: true,
+        secure: process.env.SESSION_COOKIE_SECURE === "false" ? false : true, // Enforce SSL unless explicitly overridden
         secure: cookieSecure,
         maxAge: sessionTtl,
         sameSite: 'lax',
