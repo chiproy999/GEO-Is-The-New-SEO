@@ -26,7 +26,7 @@ const getClientIp = (req: Request): string | undefined => {
     : forwardedHeader;
 
   const forwardedIp = rawForwarded?.split(",")[0]?.trim();
-  return forwardedIp || req.socket.remoteAddress || undefined;
+  return forwardedIp || req.socket.remoteAddress;
 };
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -43,6 +43,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const user = await storage.getUser(userId);
       res.json(user);
     } catch (error) {
+      console.error("Error fetching user:", error);
       const message = error instanceof Error ? error.message : "Failed to fetch user";
       res.status(500).json({ message });
     }
@@ -66,7 +67,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post(
     "/api/checklist/progress",
     isAuthenticated,
-    async (req: AuthenticatedRequest<InsertChecklistProgress>, res: Response) => {
+    async (req: AuthenticatedRequest<unknown>, res: Response) => {
       try {
         const userId = req.user.claims.sub;
         // Validate request body excluding userId since it comes from auth session
@@ -78,6 +79,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
         res.json(progress);
       } catch (error) {
+        console.error("Checklist progress update error:", error);
         const message = error instanceof Error ? error.message : "Invalid checklist update";
         res.status(400).json({ message });
       }
@@ -97,7 +99,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Email subscription endpoint
-  app.post("/api/subscribe", async (req: Request<unknown, unknown, InsertEmailSubscriber>, res: Response) => {
+  app.post("/api/subscribe", async (req: Request<unknown, unknown, unknown>, res: Response) => {
     try {
       // Get IP and user agent for tracking
       const ipAddress = getClientIp(req);
@@ -140,6 +142,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       });
     } catch (error) {
+      console.error("Subscription error:", error);
       const message = error instanceof Error ? error.message : "Failed to subscribe";
       if (message === "Email already subscribed") {
         res.json({
